@@ -11,6 +11,18 @@ A not-so-common suggestion for PyCharm users
     Be careful with 'New project -> More settings -> Application name'
     the app being created can't be recognized for later migrating command
     So, do use the normal way to create an app: `./manage.py startapp blog`!
+    
+About "migrations"
+    Show  :: ./manage.py showmigrations                 when in doubt, use it!
+    Show  :: ./manage.py sqlmigrate APP_NAME MIG_NAME   underlying SQL code of migration
+    Make  :: ./manage.py makemigrations APP_NAME        
+    Apply :: ./manage.py migrate
+    
+There's BIG BIG potentials in the `Meta` class inside those models
+    DB table name   <-  db_table = 'post'   (far better than `blog(app)_post(model)`)
+    Order by what   <-  ordering = ['-publish',]
+    ...
+
 
 """
 
