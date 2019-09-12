@@ -23,7 +23,9 @@ There's BIG BIG potentials in the `Meta` class inside those models
     Order by what   <-  ordering = ['-publish',]
     ...
 
-
+Model(models.py) and Admin(admin.py)
+    basic functionality(display)    admin.site.register(Post)
+    more control and styling        register by using a decorator, the rest is your job  
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
