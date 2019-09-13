@@ -3,10 +3,20 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self) \
+            .get_queryset() \
+            .filter(status='published')
+
+
 class Post(models.Model):
     """There really isn't much to talk about after I've gained experiences,
     the only thing need to pay attention to is the `ForeigKey` related stuff
     """
+
+    posts = models.Manager()  # MODEL.posts.METHODS
+    published = PublishedManager()
 
     STATUS_CHOICES = (
         ('draft', 'Draft'),

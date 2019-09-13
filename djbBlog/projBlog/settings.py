@@ -26,6 +26,38 @@ There's BIG BIG potentials in the `Meta` class inside those models
 Model(models.py) and Admin(admin.py)
     basic functionality(display)    admin.site.register(Post)
     more control and styling        register by using a decorator, the rest is your job  
+
+The ORM (it's better think them as SQL-equiv-but-in-Python! well.. it IS!)
+    [Doc (when in doubt, search the fucking doc)]
+        https://docs.djangoproject.com/en/2.0/topics/db/queries#retrieving-objects
+
+    [WHERE]
+        https://docs.djangoproject.com/en/2.0/topics/db/queries#field-lookups-intro
+        e.g. 
+            Post .objects.filter(publish__year=2017)
+            Entry.objects.filter(pub_date__range=(start_date, end_date))
+
+    [INSERT]
+        e.g.
+            inst = MODEL(field=VAL, filed2=VAL..)
+            inst.save()
+            
+            MODEL.objects.create(field=VAL, filed2=VAL..)
+        
+    [UPDATE]
+        e.g.
+            inst = MODEL(field=VAL, filed2=VAL..)
+            inst.field = NEW_VAL
+            inst.save()
+            
+    [DELETE]
+        e.g.
+            inst = MODEL.objects.all().filter(slug__contains='yikes')
+            inst.delete()
+            
+Why using "managers"?
+    Short answer    readability, convenience
+    Long  answer    https://stackoverflow.com/questions/14689237/what-is-a-manager-in-django
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
