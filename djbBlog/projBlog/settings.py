@@ -58,6 +58,26 @@ The ORM (it's better think them as SQL-equiv-but-in-Python! well.. it IS!)
 Why using "managers"?
     Short answer    readability, convenience
     Long  answer    https://stackoverflow.com/questions/14689237/what-is-a-manager-in-django
+
+Where to put your templates?
+    By default, Django looks for `APP/templates/` and `ROOT/templates/`
+    You can put all ur stuff in the root-level ones (no need to modify `APP_DIRS`)
+
+Where to put your static files?
+    Each app should has its own static-files folder (e.g. APP/static)
+
+The routes (urls.py)
+    There's some links weren't supposed to be accessed directly (like "typing manually")
+    
+    The importance of url routes are beyond the words (e.g. view, model, template)
+    [1] view    what u wanna do/achieve     Get data / render templ / passing args
+    [2] url     access directly, or not     One for app, one for /ROOT/APP(blog)/url_patterns
+    [3] templ   set a base, then derives    Pass(models)/Receive(views) data / static / templtags
+    [4] model   more things if for templ    Not much to do initially, but more for templ later :)
+
+    Also, a simple intro about `get_absolute_url`   
+    ~ It was trying to use `reverse` to return a (relative) url (e.g. /blog/)
+    ~ Passing those args are simply the model itself requires that (aka. 'not for other model')
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -102,8 +122,7 @@ ROOT_URLCONF = 'projBlog.urls'
 TEMPLATES = [
     {
         'BACKEND' : 'django.template.backends.django.DjangoTemplates',
-        'DIRS'    : [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS'    : [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS' : {
             'context_processors': [
