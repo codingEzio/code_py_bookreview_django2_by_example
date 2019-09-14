@@ -94,6 +94,7 @@ How to safely store sensitive data?
     [2] enable it (follow its tutorial) (both are ok: manage.py, settings.py)
     [3] add `.env` to your .gitignore file
     [4] add stuff to ur `.env` file at repo's root folder (done☺️)
+    [_] to test it: <1> run Py Console <2> print(os.environ.get('EMAIL_HOST'))
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
