@@ -84,6 +84,9 @@ About adding pagination
     [1] view        paging data(posts) -> get page num -> get its data (with a bit error handling)
     [2] templates   pagination.html     the PREVIOUS/NEXT part
                     blog/list.html      include the pagination part (XD)
+
+    Y'all need to change the param `with page=posts` to `with page=page_obj` (list.html)
+    if you're using class-based views
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

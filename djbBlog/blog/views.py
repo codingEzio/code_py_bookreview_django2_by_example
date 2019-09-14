@@ -10,7 +10,7 @@ class PostListView(ListView):
     context_object_name = 'posts'  # the name'd be used in the context (e.g. template)
     paginate_by = 3  # no more manual error handling, no need to form the query (?page)
     paginate_orphans = 1
-    template_name = 'blog/post/list.html'
+    template_name = 'blog/post/list.html'  # the param being passed into need to change
 
 
 def post_list(request):
