@@ -87,6 +87,13 @@ About adding pagination
 
     Y'all need to change the param `with page=posts` to `with page=page_obj` (list.html)
     if you're using class-based views
+    
+How to safely store sensitive data?
+    Quick setup
+    [1] pipenv install python-dotenv
+    [2] enable it (follow its tutorial) (both are ok: manage.py, settings.py)
+    [3] add `.env` to your .gitignore file
+    [4] add stuff to ur `.env` file at repo's root folder (done☺️)
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -191,3 +198,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email setup
+
+# You'll need more than this, the rest of them were stored in the .env file
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
