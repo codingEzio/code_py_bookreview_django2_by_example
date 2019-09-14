@@ -78,6 +78,12 @@ The routes (urls.py)
     Also, a simple intro about `get_absolute_url`   
     ~ It was trying to use `reverse` to return a (relative) url (e.g. /blog/)
     ~ Passing those args are simply the model itself requires that (aka. 'not for other model')
+
+About adding pagination
+    Two parts only: views(Paginator) and templates(previous|next|page_num)
+    [1] view        paging data(posts) -> get page num -> get its data (with a bit error handling)
+    [2] templates   pagination.html     the PREVIOUS/NEXT part
+                    blog/list.html      include the pagination part (XD)
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
