@@ -1,13 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
 
 from .models import Post
+
+
+class PostListView(ListView):
+    queryset = Post.published.all()  # fetch all if using `model = Post`
+    context_object_name = 'posts'  # the name'd be used in the context (e.g. template)
+    paginate_by = 3  # no more manual error handling, no need to form the query (?page)
+    paginate_orphans = 1
+    template_name = 'blog/post/list.html'
 
 
 def post_list(request):
     # Paging data & customization (/3, <1)
     object_list = Post.published.all()
-    paginator = Paginator(object_list, 3, orphans=1)
+    paginator = Paginator(object_list, 3, orphans=1)  # 6->2p 7->2p 8->3p
 
     # localhost:8000/blog/?page=WHAT_U_SPECIFIED
     page = request.GET.get('page')  # get the current page number
