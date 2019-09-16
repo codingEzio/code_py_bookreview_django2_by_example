@@ -114,6 +114,12 @@ Adding tags using 'django_taggit'
     [2] add `taggit` to 'INSTALLED_APPS' (& some tweaks, like `TAGGIT_CASE_INSENSITIVE = True`)
     [3] add `tags = TaggableManager()` to our model `Post`
     [4] make migrations (since it's tightly related to our models) (e.g. djmakemig blog && djmig)
+
+Recommending similar posts (based on tags)
+    Rough steps
+    [1] get IDs of those tags
+    [2] get posts with the same ID (exclude the current post)
+    [3] get the tag with the most occurrences then order by 'publish' (DESC) (:4) 
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
