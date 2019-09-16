@@ -103,6 +103,10 @@ About `related_name` in model's Fk/M2M fields definition
         post = models.ForeignKey(Post,
                                  on_delete=models.CASCADE,
                                  related_name='comments')
+
+Two ways to build a form
+    1) forms.Form       Handwritten         can be though as a HTML snippet
+    2) forms.ModelForm  Based on DB model   Django auto-create the widgets for you
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
