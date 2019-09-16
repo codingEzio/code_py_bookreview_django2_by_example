@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 
+from taggit.managers import TaggableManager
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -16,6 +18,8 @@ class Post(models.Model):
     """There really isn't much to talk about after I've gained experiences,
     the only thing need to pay attention to is the `ForeigKey` related stuff
     """
+
+    tags = TaggableManager()
 
     posts = models.Manager()  # MODEL.posts.METHODS
     published = PublishedManager()

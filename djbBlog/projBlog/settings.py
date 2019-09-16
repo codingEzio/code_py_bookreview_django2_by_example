@@ -107,6 +107,13 @@ About `related_name` in model's Fk/M2M fields definition
 Two ways to build a form
     1) forms.Form       Handwritten         can be though as a HTML snippet
     2) forms.ModelForm  Based on DB model   Django auto-create the widgets for you
+
+Adding tags using 'django_taggit'
+    Basic setup
+    [1] pipenv install django_taggit==0.22.2
+    [2] add `taggit` to 'INSTALLED_APPS' (& some tweaks, like `TAGGIT_CASE_INSENSITIVE = True`)
+    [3] add `tags = TaggableManager()` to our model `Post`
+    [4] make migrations (since it's tightly related to our models) (e.g. djmakemig blog && djmig)
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -134,6 +141,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'blog.apps.BlogConfig',
+
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -216,3 +225,6 @@ STATIC_URL = '/static/'
 
 # You'll need more than this, the rest of them were stored in the .env file
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Third-party library settings
+TAGGIT_CASE_INSENSITIVE = True
