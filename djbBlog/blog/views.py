@@ -9,6 +9,8 @@ from django.views.generic import ListView
 from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 
+from taggit.models import Tag
+
 
 class PostListView(ListView):
     queryset = Post.published.all()  # fetch all if using `model = Post`
@@ -18,10 +20,16 @@ class PostListView(ListView):
     template_name = 'blog/post/list.html'  # the param being passed into need to change
 
 
-def post_list(request):
-    # Paging data & customization (/3, <1)
+def post_list(request, tag_slug = None):
     object_list = Post.published.all()
-    paginator = Paginator(object_list, 3, orphans=1)  # 6->2p 7->2p 8->3p
+
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+
+    # Paging data & customization (e.g. 6->2p 7->2p 8->3p)
+    paginator = Paginator(object_list, 3, orphans=1)
 
     # localhost:8000/blog/?page=WHAT_U_SPECIFIED
     page = request.GET.get('page')  # get the current page number
@@ -37,7 +45,8 @@ def post_list(request):
     return render(request,
                   'blog/post/list.html',
                   { 'page' : page,
-                    'posts': posts })
+                    'posts': posts,
+                    'tag'  : tag })
 
 
 def post_detail(request, year, month, day, post):
