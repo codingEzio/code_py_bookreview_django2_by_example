@@ -153,6 +153,12 @@ Adding sitemap
     [4] add routes to your 'PROJECT/urls.py'
     [5] add domain name at 'http://localhost:8000/admin/sites/site/' (e.g. localhost:8000)
     [_] to test it: access 'localhost:8000/sitemap.xml'
+
+Adding feed
+    Basic setup
+    [1] add 'feeds.py' under your app (override stuff by inheriting `..syndication.views.Feed`)
+    [2] add routes to your 'APP/urls.py'
+    [_] to test it: access 'http://localhost:8000/blog/feed/' (& https://codebeautify.org/xmlviewer)
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
