@@ -120,6 +120,26 @@ Recommending similar posts (based on tags)
     [1] get IDs of those tags
     [2] get posts with the same ID (exclude the current post)
     [3] get the tag with the most occurrences then order by 'publish' (DESC) (:4) 
+
+Adding custom template tag
+    [1] create dir/file: YOUR_APP/templatetags/{__init__.py, YOUR_TAG.py}
+    [2] 
+        // Simple tag     --  simply return the result
+        // Inclusion tag  --  display the data by rendering another template
+        
+        @register.simple_tag()
+        def get_most_commented_posts(DEFAULT_VALUE_IF_WE_NEED):
+            return .. QUERYSET ..
+        
+        @register.inclusion_tag(TEMPLATE_FILE)
+        def show_latest_posts(DEFAULT_VALUE_IF_WE_NEED):
+            .. QUERYSET ..
+            return { 'USE_IN_TEMPLATE': VAR_WOULD_BE_USED_IN_TEMPLATE }
+    
+    [3] you can always give the decorator `name='most_commented_posts' as an alias
+    [4] load it in your template `{% load TAG from TAG_FILE %}` (u can use it in any templates!)
+
+ 
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
