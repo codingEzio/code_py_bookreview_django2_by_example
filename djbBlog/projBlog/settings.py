@@ -145,7 +145,14 @@ Adding custom template filter (e.g. {% XXX|filter|filter %}
     [2] use it in the same file where the template tags live (=> @register.filter)
     [3] load & add it in the templates
 
-
+Adding sitemap
+    Basic setup
+    [1] add 'django.contrib.{sites, sitemaps}' to 'INSTALLED_APPS'
+    [2] run './manage.py migrate' since the data needs to be stored in the DB
+    [3] add 'sitemaps.py' under your app (override stuff by inheriting `Sitemap`)
+    [4] add routes to your 'PROJECT/urls.py'
+    [5] add domain name at 'http://localhost:8000/admin/sites/site/' (e.g. localhost:8000)
+    [_] to test it: access 'localhost:8000/sitemap.xml'
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -160,7 +167,12 @@ SECRET_KEY = '2cg#d=s_(tv72z#o+4*j^^y194hg-yh-&l3dc&peeqs!^wrq=x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # default
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+]
 
 # Application definition
 
@@ -171,6 +183,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'blog.apps.BlogConfig',
 
