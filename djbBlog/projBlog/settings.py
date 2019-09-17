@@ -121,7 +121,7 @@ Recommending similar posts (based on tags)
     [2] get posts with the same ID (exclude the current post)
     [3] get the tag with the most occurrences then order by 'publish' (DESC) (:4) 
 
-Adding custom template tag
+Adding custom template tag (e.g. {% tag %}
     [1] create dir/file: YOUR_APP/templatetags/{__init__.py, YOUR_TAG.py}
     [2] 
         // Simple tag     --  simply return the result
@@ -139,7 +139,13 @@ Adding custom template tag
     [3] you can always give the decorator `name='most_commented_posts' as an alias
     [4] load it in your template `{% load TAG from TAG_FILE %}` (u can use it in any templates!)
 
- 
+Adding custom template filter (e.g. {% XXX|filter|filter %}
+    Markdown syntax setup (backend)
+    [1] pipenv install Markdown==2.6.11
+    [2] use it in the same file where the template tags live (=> @register.filter)
+    [3] load & add it in the templates
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
