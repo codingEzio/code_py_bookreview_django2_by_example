@@ -189,6 +189,18 @@ Setup full-text search (powered by PostgreSQL)
     [2] add a search form           forms.py <- SearchField 
     [3] add 'post_search' logic     views.py <- SearchVector
     [4] add 'post_search' routes    urls.py  <- 'search'/
+
+    Tweak (optional)
+    [1] add "weight"
+        > https://docs.djangoproject.com/en/2.0/ref/contrib/postgres/search#postgresql-fts-weighting-queries
+
+    [2] add "trigram"
+        Database
+            $ psql blog_djexpreview
+            $ CREATE EXTENSION pg_trgm;
+        Django
+            replace the old stuff (e.g. "weight", "searchVector")
+            with `.annotate(similarity=TrigramSimilarity('title', query))`
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
