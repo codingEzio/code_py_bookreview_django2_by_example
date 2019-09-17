@@ -159,6 +159,31 @@ Adding feed
     [1] add 'feeds.py' under your app (override stuff by inheriting `..syndication.views.Feed`)
     [2] add routes to your 'APP/urls.py'
     [_] to test it: access 'http://localhost:8000/blog/feed/' (& https://codebeautify.org/xmlviewer)
+
+Setup postgreSQL
+    Basic setup (if you're on macOS)
+    [1] brew install postgresql@10 && brew services restart postgresql
+        $ rm -fv /usr/local/var/postgres/postmaster.id  // just in case
+        $ createuser -dP USERNAME
+        $ createdb   -E  utf-8 USERNAME DATABASE_NAME
+    [2] install python driver
+        $ pipenv install psycopg2-binary==2.7.4
+    [3] modify stuff in 'settings.py'
+        ADD ~ DATABASES
+            'ENGINE'  : 'django.db.backends.postgresql',
+            'NAME'    : os.environ.get('POSTGRESQL_DB_NAME'),
+            'USER'    : os.environ.get('POSTGRESQL_USER'),
+            'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
+        DEL ~ INSTALLED_APPS
+            'django.contrib.sites',
+            'django.contrib.sitemaps',
+    [4] make changes
+        1) ./manage.py migrate          // clean DB, data needs to be filled
+        2) ./manage.py createsuperuser  // must remove the `..contrib.site..` if there's no data existed
+
+    >> I should have use PostgreSQL at the very outset :(
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -190,8 +215,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
+    # 'django.contrib.sites',
+    # 'django.contrib.sitemaps',
 
     'blog.apps.BlogConfig',
 
@@ -233,8 +258,12 @@ WSGI_APPLICATION = 'projBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME'  : os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME'  : os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE'  : 'django.db.backends.postgresql',
+        'NAME'    : os.environ.get('POSTGRESQL_DB_NAME'),
+        'USER'    : os.environ.get('POSTGRESQL_USER'),
+        'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
     }
 }
 
