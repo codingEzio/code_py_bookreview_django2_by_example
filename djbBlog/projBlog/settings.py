@@ -183,7 +183,12 @@ Setup postgreSQL
 
     >> I should have use PostgreSQL at the very outset :(
 
-
+Setup full-text search (powered by PostgreSQL)
+    Basic setup
+    [1] add 'django.contrib.postgres' to 'INSTALLED_APPS'
+    [2] add a search form           forms.py <- SearchField 
+    [3] add 'post_search' logic     views.py <- SearchVector
+    [4] add 'post_search' routes    urls.py  <- 'search'/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -217,6 +222,7 @@ INSTALLED_APPS = [
 
     # 'django.contrib.sites',
     # 'django.contrib.sitemaps',
+    'django.contrib.postgres',
 
     'blog.apps.BlogConfig',
 
