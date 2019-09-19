@@ -28,12 +28,54 @@ Other stuff needs to be done before we started
     Create superusers
     $ ./manage.py createsuperuser
     
+Implementing basic log-in
+    0) make sure that your app is in the 'INSTALLED_APPS' & its routes being set
+    1) write HTML, that is, login page and related widgets(aka. forms)
+    2) write routes for your view
+    3) write views  for processing logic & rendering the template
+    
+Some confusions (beginner-level)
+    Q: What does "action" do in the `<form action="{% url 'login' %}" ..`
+    A: It defines 'Where to send the form-data when the form is submitted.'
+       The process would be like '{% url %}' -> 'route' -> 'view' (checking pwd/name)
+    
+    Q: What if the value of `<form action..` is "#" or "."?
+    A: Both of them (#, .) indicates that your form was sent to the same|current page.
+    
+    Q: Form and <input> 
+    A: Any input inside a form (hidden or not) would be submitted 
+       e.g. <input type="hidden" name="my_key" value="1000"> => my_key=1000
+
+What the heck is `<input ..hidden.. value="{{ next }}">` (registration/login.html)
+    Q: More specifically, what is the `{{ next }}`
+    A: It was used by '@login_required' and other functions, mainly for "redirecting",
+       an example: '/login?next=%2Fdashboard' => after "login", redirect to "dashboard"
+       
+    Q: In conclusion, why we use the bloody `next`?
+    A: 1> we're using Django's default authentication ('login.html' & 'logged_out.html')
+       2> we need to redirect to a page after users logged in (for us, it's dashboard.html)
+       3> cuz Django use it internally (pls check the src code of `login_required`)
+    
+    ~ https://www.w3schools.com/tags/att_input_value.asp
+    ~ https://stackoverflow.com/questions/3441436/the-next-parameter-redirect-django-contrib-auth-login
+    Part of it is related to `@login_required`      ( redirect to {{ next }} )
+    Part of it is related to "overriding template"  ( hidden input `value={{next}}` for 'post' )
+
+Implementing login & log-out by the help of Django
+    0) still {url+view+template}, plus a little bit conf in the 'settings.py'
+    1) get the views (urls.py), plus the routes also being set at the same time
+    2) customize templ by creating 'templates/registration/{login,logged_out}.html'
+    3) conf(settings.py) => [redirect-to-where, where-to-login, where-to-logout] 
+    
+    plus
+    ~1 write a dashboard page
+    ~2 add user's name to the nav-bar after he/she's logged in
+
 
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -51,7 +93,6 @@ ALLOWED_HOSTS = [
     '[::1]',
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -63,7 +104,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 
 ]
 
@@ -81,11 +121,11 @@ ROOT_URLCONF = 'djbBookmark.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'BACKEND' : 'django.template.backends.django.DjangoTemplates',
+        'DIRS'    : [os.path.join(BASE_DIR, 'templates')]
         ,
         'APP_DIRS': True,
-        'OPTIONS': {
+        'OPTIONS' : {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -98,7 +138,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djbBookmark.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -110,7 +149,6 @@ DATABASES = {
         'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -130,7 +168,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -144,9 +181,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
+# We're using authentication views provided by Django
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
