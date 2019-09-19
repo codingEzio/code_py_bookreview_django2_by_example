@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm
+from .forms import LoginForm, UserRegistrationForm
 
 
 @login_required
@@ -12,6 +12,27 @@ def dashboard(request):
     return render(request,
                   'account/dashboard.html',
                   { 'section': 'dashboard' })
+
+
+def register(request):
+    if request.method == 'POST':
+        user_from = UserRegistrationForm(request.POST)
+
+        if user_from.is_valid():
+            new_user = user_from.save(commit=False)
+            new_user.set_password(user_from.cleaned_data['password'])
+            new_user.save()
+
+            return render(request,
+                          'account/register_done.html',
+                          { 'new_user': new_user, })
+
+    else:
+        user_from = UserRegistrationForm()
+
+    return render(request,
+                  'account/register.html',
+                  { 'user_form': user_from, })
 
 
 def user_login(request):

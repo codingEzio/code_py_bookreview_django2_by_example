@@ -45,6 +45,15 @@ Some confusions (beginner-level)
     Q: Form and <input> 
     A: Any input inside a form (hidden or not) would be submitted 
        e.g. <input type="hidden" name="my_key" value="1000"> => my_key=1000
+    
+    Q: What about the `clean_password2` in 'forms.py'
+    A: For any fields you wanna clean it by yourself, the fmt looks like 'clean_FIELDNAME()'.
+       
+       Field validators like 'max_length' should be moved into your 
+       `clean_FIELDNAME` func. Also check this out: https://stackoverflow.com/a/4914205/6273859
+       
+       For those fields who depend on each other, use `clean()` (forms.Form)
+       Here: https://docs.djangoproject.com/en/2.2/ref/forms/validation#validating-fields-with-clean
 
 What the heck is `<input ..hidden.. value="{{ next }}">` (registration/login.html)
     Q: More specifically, what is the `{{ next }}`
@@ -61,7 +70,7 @@ What the heck is `<input ..hidden.. value="{{ next }}">` (registration/login.htm
     Part of it is related to `@login_required`      ( redirect to {{ next }} )
     Part of it is related to "overriding template"  ( hidden input `value={{next}}` for 'post' )
 
-Implementing login & log-out by the help of Django
+Implementing login & log-out
     0) still {url+view+template}, plus a little bit conf in the 'settings.py'
     1) get the views (urls.py), plus the routes also being set at the same time
     2) customize templ by creating 'templates/registration/{login,logged_out}.html'
@@ -71,10 +80,17 @@ Implementing login & log-out by the help of Django
     ~1 write a dashboard page
     ~2 add user's name to the nav-bar after he/she's logged in
 
-Implementing password-reset by the help of Django
+Implementing password-reset
     0) configure the email backend (whether it's console or SMTP)
     1) write templates  ( password_reset_????.html, 5 in total )
     2) write routes     ( 1-line: path('', include('django.contrib.auth.urls')) )
+
+Implementing user registration
+    0) 'form' and {url+view+template} (heavily depended on Django's `User` model)
+    1) write forms      two parts <1>clean pwd2 <2>Meta_plus_modelForm + two password field
+    2) write views      either create the user or just display a blank form
+    3) write templ      main(initialize the form), done(welcome John)
+    4) write routes     just 'register/'
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

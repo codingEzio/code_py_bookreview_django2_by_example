@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    path('register/', views.register, name='register'),
 
     # These can be omitted to just one line (`django.contrib.auth.views.urls`)
     # path('', include('django.contrib.auth.urls'))
