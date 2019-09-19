@@ -71,7 +71,10 @@ Implementing login & log-out by the help of Django
     ~1 write a dashboard page
     ~2 add user's name to the nav-bar after he/she's logged in
 
-
+Implementing password-reset by the help of Django
+    0) configure the email backend (whether it's console or SMTP)
+    1) write templates  ( password_reset_????.html, 5 in total )
+    2) write routes     ( 1-line: path('', include('django.contrib.auth.urls')) )
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -185,6 +188,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.environ.get("EMAIL_HOST")
+# EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+# EMAIL_PORT = os.environ.get("EMAIL_PORT")
+# EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+
 
 # We're using authentication views provided by Django
 
