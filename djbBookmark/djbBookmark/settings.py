@@ -135,6 +135,22 @@ Extending the user model (add 'profile photo' when registering)
 Adding notification message
     view    processing the logic & display msg at the right time
     templ   loop the msges even if there's only one (Q: why? A: ../contrib/messages#message-displaying)
+
+Adding social authentication
+    Basic setup
+    [01] pipenv install social-auth-app-django==2.1.0
+    [02] add 'social-auth/' to project-level urls.py
+    [03] add 'social_django' to 'INSTALLED_APPS' (settings.py)
+    [04] ./manage.py migrate (to create needed models for social-auth)
+    [05] use hosts (127.... mysite.com) or ngrok (ngrok http 8000) for future testing
+
+    STATUS: doesn't have any functionalities yet.
+
+    Recommended articles
+    ~ https://simpleisbetterthancomplex.com/tutorial/2016/10/24/how-to-add-social-login-to-django.html
+    ~ https://segmentfault.com/a/1190000000635319
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -150,10 +166,10 @@ SECRET_KEY = '%z%fhnp6o30=re7u=^s+ks1a832^uw7fkx14zm=ma*mx_(oh-&'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # default
     'localhost',
     '127.0.0.1',
     '[::1]',
+    'mysite.com',  # add `127.0.0.1 mysite.com` to /etc/hosts
 ]
 
 # Application definition
@@ -168,6 +184,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -267,3 +284,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+
+# recommended setting for Social Auth Django
+# ~ https://python-social-auth-docs.readthedocs.io/en/latest/configuration/django.html
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+# SOCIAL_AUTH_GOOGLE_OAUTH_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH_KEY')
+# SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH_SECRET')
