@@ -132,7 +132,9 @@ Extending the user model (add 'profile photo' when registering)
     <3> admin                           ->  display at backend
     <4> form + view + url + template    ->  widgets (backend: init,vali,route) (frontend: submit,tip) 
 
-
+Adding notification message
+    view    processing the logic & display msg at the right time
+    templ   loop the msges even if there's only one (Q: why? A: ../contrib/messages#message-displaying)
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
