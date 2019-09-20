@@ -1,5 +1,6 @@
 
-# others
+# Anything else
+**/media/
 *.rdb
 .idea
 ._*

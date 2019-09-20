@@ -28,11 +28,9 @@ Other stuff needs to be done before we started
     Create superusers
     $ ./manage.py createsuperuser
     
-Implementing basic log-in
-    0) make sure that your app is in the 'INSTALLED_APPS' & its routes being set
-    1) write HTML, that is, login page and related widgets(aka. forms)
-    2) write routes for your view
-    3) write views  for processing logic & rendering the template
+    
+----- ----- ----- ----- ----- ----- 
+
     
 Some confusions (beginner-level)
     Q: What does "action" do in the `<form action="{% url 'login' %}" ..`
@@ -54,6 +52,24 @@ Some confusions (beginner-level)
        
        For those fields who depend on each other, use `clean()` (forms.Form)
        Here: https://docs.djangoproject.com/en/2.2/ref/forms/validation#validating-fields-with-clean
+
+Some confusions (more-advanced level)
+    Q: Why use `settings.AUTH_USER_MODEL` instead of `get_user_model()`  (models.py)
+    A: The `..AUTH..MODEL` will delay the retrieval until all the apps are loaded.
+       In short, the 1st one is safer. (~ https://stackoverflow.com/a/24630589/6273859)
+    
+    Q: 
+    A: 
+
+
+----- ----- ----- ----- ----- ----- 
+
+    
+Implementing basic log-in
+    0) make sure that your app is in the 'INSTALLED_APPS' & its routes being set
+    1) write HTML, that is, login page and related widgets(aka. forms)
+    2) write routes for your view
+    3) write views  for processing logic & rendering the template
 
 What the heck is `<input ..hidden.. value="{{ next }}">` (registration/login.html)
     Q: More specifically, what is the `{{ next }}`
@@ -205,6 +221,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 # Email
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -214,7 +233,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 # EMAIL_PORT = os.environ.get("EMAIL_PORT")
 # EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
-
 
 # We're using authentication views provided by Django
 
