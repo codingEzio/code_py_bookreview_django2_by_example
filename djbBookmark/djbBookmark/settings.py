@@ -107,6 +107,32 @@ Implementing user registration
     2) write views      either create the user or just display a blank form
     3) write templ      main(initialize the form), done(welcome John)
     4) write routes     just 'register/'
+
+Extending the user model (add 'profile photo' when registering)
+    00) the only visible diff is that two fields were added to the "registration page"
+    01) conf   media files  MEDIA_URL, MEDIA_ROOT                   settings.py
+    02) conf   field pkg    pipenv install Pillow==5.0.1            write this in 'Pipfile' is okay as well
+    03) write  routes       static(..MEDIA_URL, ..MEDIA_ROOT)       write this in proj-level urls.py
+    04) add    fields       two more fields (date_of_birth, photo)
+    05) do     migrations   ./manage.py makemigrations && ./manage.py migrate 
+    06) conf   admin        register 'Profile' model see you can see it         (** cannot modify yet **)
+    07) write  forms        specifically, the user-info (e.g. fname) and the profile part (d.o.b & photo)
+    08) write  templates    initialize those forms
+    09) modify views        add `Profile.objects.create(user=new_user)` (a placeholder for future mod)
+    10) add    views        add `edit_profile` function (do -> behavior[POST|GET], validation, rendering)    
+    11) write  routes       add `edit_profile/` for the view function above     (** now you modify it **)
+    
+    Note: since we've added new fields to the user model,
+          every user we created before will be unable to upload their photo (okay🤯)
+          what you should do is to create it directly in the 'Profile' admin page
+          
+    Simplified version
+    <1> proj-url + settings             ->  serving static files
+    <2> model + Pipfile + migrations/*  ->  ready for photo profile
+    <3> admin                           ->  display at backend
+    <4> form + view + url + template    ->  widgets (backend: init,vali,route) (frontend: submit,tip) 
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
