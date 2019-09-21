@@ -231,6 +231,18 @@ Implementing the bookmarking feature
     ~ urls          form the routes based on 'view'
     ~ models        store those "reversed urls"
     ~ templates     img/title/likes/description     /templates/images/image/detail.html     
+
+Generating thumbnail for uploaded pictures
+    Basic setup
+    1) pipenv install sorl-thumbnail==12.5.0
+    2) add `sorl.thumbnail` to 'INSTALLED_APPS'
+    3) run migrations (./manage.py migrate)
+    4) replace the original `<img src=.. ..>` with new syntax, done!
+    
+    To test it
+    * pin an image, the newly created/redirected image would be a compressed thumbnail
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -267,6 +279,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'social_django',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
