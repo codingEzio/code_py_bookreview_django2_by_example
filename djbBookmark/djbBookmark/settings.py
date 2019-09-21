@@ -152,6 +152,19 @@ Adding social authentication
 
 ----- ----- ----- ----- ----- ----- 
 
+
+Q&A for myself ☺️
+    Q: How does '..ManyToManyField(.. , .. , ..)' work?
+    A: Simply put, you can get data using both sides: 'User.images_liked' & 'Image.users_like'
+
+Implementing the bookmarking feature (not yet)
+    Basic setup
+    1. new app          django-admin startapp images THEN add it to 'INSTALLED_APPS'
+    2. new model        fields: {title, slug, date, url ..}
+    3. do migrations    ./manage.py makemigrations images && ./manage.py migrate (obviously)
+    4. admin register
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -177,6 +190,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'images.apps.ImagesConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
