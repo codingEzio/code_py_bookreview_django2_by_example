@@ -6,7 +6,20 @@
 
 {% block content %}
 	<h1>Dashboard</h1>
-	<p>Welcome to ︎your dashboard 🐍</p>
+	{% with total_images_created=request.user.images_created.count %}
+		<p>
+			Welcome to ︎your dashboard 🐍<br>
+			You've bookmarked {{ total_images_created }} image{{ total_images_created|pluralize }}.
+		</p>
+	{% endwith %}
+
+	<p>
+		Drag this button to your bookmarks toolbar to bookmark images:
+		<a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">
+			Pin it
+		</a>
+	</p>
+
 	<p>
 		You can <a href="{% url "edit_profile" %}">edit</a> your profile
 		or <a href="{% url "password_change" %}">change</a> your password.

@@ -157,14 +157,80 @@ Q&A for myself ☺️
     Q: How does '..ManyToManyField(.. , .. , ..)' work?
     A: Simply put, you can get data using both sides: 'User.images_liked' & 'Image.users_like'
 
-Implementing the bookmarking feature (not yet)
+    Q: Why use multi-line comments in the 'bookmarklet_launcher.js'
+    A: The single-line(//) style will comment out our code (=> not working)
+    
+    Q: Why there's `Math.random()` functions in JavaScript code
+    A: To prevent the browser from returning a cached file (src code might change over time!)
+
+    Q: Why use template string (`${VAR}`) in JavaScript code
+    A: It's clear and concise, just like the `f{name}` in Python
+
+Implementing the bookmarking feature
     Basic setup
     1. new app          django-admin startapp images THEN add it to 'INSTALLED_APPS'
     2. new model        fields: {title, slug, date, url ..}
     3. do migrations    ./manage.py makemigrations images && ./manage.py migrate (obviously)
     4. admin register
 
+    Adding form (let users be able to submit images) 
+    # widgets
+        * title         must-have
+        * url           users don't have to type this manually
+        * description   optional
+    # methods
+        * clean_url     an extension validating tool (.png .jpg ..)
+        * save          be in charge of the whole "saving image" process
+        
+    Adding view (different behaviors for POST/GET)
+    * POST  init form with data -> assign user -> saving -> redirecting
+    * GET   init from with data (url: ?..&..) (a bit different from the way we handle 'GET' previously)
+    
+    Adding template
+    * display the form (image, url, description)
+    
+    Adding routes
+    * proj    path('images/', include('images.urls', namespace='images'))
+    * app     path('create/', views.image_create, name='create')
+    
+    # An error'd raised if u submit it, cuz the `get_absolute_url` havn't implemented yet
+    # but the image would be saved
+    To test it by manually making a 'GET' request
+    >>> http://127.0.0.1:8000/images/create/
+        ?title=Python%20icon
+        &url=https://openwhisk.apache.org/images/runtimes/icon-python-text-color-horz.png
 
+    Adding (core) static files
+    * images/static/css/bookmarklet.css     copy-and-paste
+    * images/static/css/bookmarklet.js      conf | load -> find -> display | sub 'GET' 
+    * /templates/bookmarklet_launcher.js    drag to bookmark bar
+    
+    Modifying templates
+    * /templates/account/dashboard.html     images count & tips for bookmarklet
+    
+    Now the functionality is implemented, we still need to install a software 
+    called 'ngrok' for us to actually test it successfully (https!!!!)
+    # basic setup
+        $ brew cask install ngrok
+        $ ngrok http 8000
+    # what we need to change
+        ~ bookmarklet_launcher.js  site_url
+        ~ bookmarklet.js           site_url
+        ~ settings.py              ALLOWED_HOSTS
+    # about the testing process
+        0. blank                typo!
+        1. blank                images might be too small (>= 100x100)
+        2. blank                some website's syntax of `img src` is weird (e.g. Bing image)
+        2. err loading jQuery   possibly because of the uBlock extension (click twice might work)
+    # websites for testing
+        ~ https://www.amazon.com/s?k=django&ref=nb_sb_noss
+        ~ https://www.imdb.com/title/tt2543312/?ref_=ttfc_fc_tt
+        
+    Lastly, let's add a detail view for images (no more redirection errors!)
+    ~ views         write `image_detail` (get the 'id/slug' gen_ed by JavaScript code)
+    ~ urls          form the routes based on 'view'
+    ~ models        store those "reversed urls"
+    ~ templates     img/title/likes/description     /templates/images/image/detail.html     
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -184,6 +250,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'mysite.com',  # add `127.0.0.1 mysite.com` to /etc/hosts
+    'ed186bdb.ngrok.io',
 ]
 
 # Application definition
