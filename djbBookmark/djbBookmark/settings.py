@@ -258,7 +258,14 @@ Implementing the AJAX actions 'like image'
         + add button    for "invoking the bottom JS code (then calling view)" & "update the LIKE/UNLIKE"
         + add JS code   modify the `<a>` { access id/action, update data/appearance based on id/action }
 
+Implementing "AJAX ONLY!!" decorator for 'like image' function
+    $ proj/common/
+        ~ __init__.py         nothing
+        ~ decorators.py       "decorated" request.is_ajax()
 
+    $ proj/images/views.py
+        >>> from common.decorators import ajax_required
+        >>> @ajax_required  # add to the top of the 'image_like' function
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
