@@ -14,26 +14,60 @@
 		</a>
 	{% endthumbnail %}
 
-	{% with total_likes=image_inst.users_like.count %}
+	{% with total_likes=image_inst.users_like.count users_like=image_inst.users_like.all %}
 		<div class="image-info">
 			<div>
 				<span class="count">
-					{{ total_likes }} like{{ total_likes|pluralize }}
+					<span class="total">{{ total_likes }} </span> like{{ total_likes|pluralize }}
 				</span>
+				<a href="#" class="like button"
+				   data-id="{{ image_inst.id }}"
+				   data-action="{% if request.user in users_like %}un{% endif %}like">
+					{% if request.user not in users_like %}
+						Like
+					{% else %}
+						Unlike
+					{% endif %}
+				</a>
 			</div>
 			{{ image_inst.description|linebreaks }}
 		</div>
 
-		{# Not implemented yet #}
 		<div class="image-likes">
 			{% for user in image_inst.users_like.all %}
 				<div>
 					<img src="{{ user.profile.photo.url }}" alt="User photo">
-					<p>{{ user.first_name }} + {{ user.last_name }}</p>
+					<p>{{ user.first_name }} {{ user.last_name }}</p>
 				</div>
 			{% empty %}
 				Nobody likes this image yet.
 			{% endfor %}
 		</div>
 	{% endwith %}
+{% endblock %}
+
+{% block domready %}
+	$('a.like').click(function (e) {
+		e.preventDefault();
+
+		$.post('{% url "images:like" %}',
+
+			{
+				id: $(this).data('id'),
+				action: $(this).data('action')
+			},
+
+			function (data) {
+				if (data['status'] == 'ok') {
+				  var prev_action = $('a.like').data('action');
+
+				  $('a.like').data('action', prev_action == 'like' ? 'unlike' : 'like');
+				  $('a.like').text(prev_action == 'like' ? 'UNLIKE' : 'LIKE');
+
+				  var prev_likes = parseInt($('span.count .total').text());
+				  $('span.count .total').text(prev_action == 'like' ? prev_likes + 1 : prev_likes - 1);
+				}
+			}
+		);
+	});
 {% endblock %}

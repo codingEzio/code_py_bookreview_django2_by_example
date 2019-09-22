@@ -242,6 +242,22 @@ Generating thumbnail for uploaded pictures
     To test it
     * pin an image, the newly created/redirected image would be a compressed thumbnail
 
+Implementing the AJAX actions 'like image'
+    # Django
+    ~ views     do opt on database, return JSON-response
+    ~ urls      like/
+    
+    # Template (JavaScript)
+    ~ base.html
+        + loading jQuery & js-cookie
+        + csrf protection in AJAX requests
+        + new block [% domready %} for 'liking image' code
+    ~ images/image/detail.html
+        + add variable  for 'who liked this picture'
+        + add class     for "updating the like count"
+        + add button    for "invoking the bottom JS code (then calling view)" & "update the LIKE/UNLIKE"
+        + add JS code   modify the `<a>` { access id/action, update data/appearance based on id/action }
+
 
 """
 
@@ -262,7 +278,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'mysite.com',  # add `127.0.0.1 mysite.com` to /etc/hosts
-    'ed186bdb.ngrok.io',
+    '8a0ce388.ngrok.io',
 ]
 
 # Application definition

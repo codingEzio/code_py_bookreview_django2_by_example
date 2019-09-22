@@ -1,8 +1,8 @@
 (function () {
-    const jquery_ver = '3.1.1';
+    const jquery_ver = '3.4.1';
 
     // const site_url = 'http://127.0.0.1:1080/';
-    const site_url = 'https://ed186bdb.ngrok.io/';
+    const site_url = 'https://8a0ce388.ngrok.io/';
     const static_url = site_url + 'static/';
 
     // The min w/h for crawling
