@@ -266,6 +266,15 @@ Implementing "AJAX ONLY!!" decorator for 'like image' function
     $ proj/images/views.py
         >>> from common.decorators import ajax_required
         >>> @ajax_required  # add to the top of the 'image_like' function
+
+Implementing image list (& using AJAX to achieve lazy-loading)
+    Interaction between the 'view' and the JS code inside the `{% block domready %}`.
+    ~ urls      ''
+    ~ views     (0) normally return 8 pics per page (1) scrolling -> ajax loading more
+    ~ template  [1] a base 'list_ajax.htm' (thumb, link) [2] a list page plus the {%domready%}
+
+    To test it, do make sure that you have at least 10 pictures pinned,
+    since the lowest number for paginator to work is 8. 
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
