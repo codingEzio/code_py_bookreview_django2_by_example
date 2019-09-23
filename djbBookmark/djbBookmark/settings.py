@@ -1,6 +1,8 @@
 import os
+from django.urls import reverse_lazy
 
-NOTES = """Setup postgreSQL database at the very outset
+NOTES = """
+Setup postgreSQL database at the very outset
     Basic steps
     [1] System
         $ brew   install postgresql && brew services restart postgresql
@@ -56,9 +58,6 @@ Some confusions (more-advanced level)
     Q: Why use `settings.AUTH_USER_MODEL` instead of `get_user_model()`  (models.py)
     A: The `..AUTH..MODEL` will delay the retrieval until all the apps are loaded.
        In short, the 1st one is safer. (~ https://stackoverflow.com/a/24630589/6273859)
-    
-    Q: 
-    A: 
 
 
 ----- ----- ----- ----- ----- ----- 
@@ -275,6 +274,28 @@ Implementing image list (& using AJAX to achieve lazy-loading)
 
     To test it, do make sure that you have at least 10 pictures pinned,
     since the lowest number for paginator to work is 8. 
+
+Implementing list/detail views for user profiles
+    views           user_list, user_detail
+    routes          user/  user/<username>/
+    templates       list.html, detail.html (templates/account/user/)
+    setting conf  
+        # another way to achieve `get_absolute_url`  
+        # since we don't get to change the `auth.user`, this is the only way
+        ABSOLUTE_URL_OVERRIDES = {
+            'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+        }
+
+Implementing user-can-follow-each-other feature (not yet)
+    Base setup
+    <1> an intermediate model       Contact -> At when(created) who(user_from) FOLLOWED who(user_to)
+    <2> a dynamically added field   Contact <> User { user1.followers.all(), user1.following.all() }
+    <3> do migrations for `account` app -> ./manage.py makemigrations account && ./manage.py migrate
+    
+    Do read the doc to gain more understanding of "M2M in Django"
+    ~ https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ManyToManyField.through
+
+
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -294,7 +315,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'mysite.com',  # add `127.0.0.1 mysite.com` to /etc/hosts
-    '8a0ce388.ngrok.io',
+    'ec231e41.ngrok.io',
 ]
 
 # Application definition
@@ -395,6 +416,13 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Alternative way to specify an URL for a model
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail',
+                                        args=[u.username])
+}
 
 # Email
 
