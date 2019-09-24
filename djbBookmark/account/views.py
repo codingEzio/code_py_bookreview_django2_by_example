@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from common.decorators import ajax_required
+from actions.utils import create_action
+from actions.models import Action
+
 from .models import Profile, Contact
 from .forms import (
     LoginForm,
@@ -19,9 +22,18 @@ from .forms import (
 
 @login_required
 def dashboard(request):
+    actions = Action.objects.exclude(user=request.user)
+    following_ids = request.user.following.values_list('id',
+                                                       flat=True)
+
+    if following_ids:
+        actions = actions.filter(user_id__in=following_ids)
+    actions = actions[:10]
+
     return render(request,
                   'account/dashboard.html',
-                  { 'section': 'dashboard' })
+                  { 'section': 'dashboard',
+                    'actions': actions })
 
 
 def register(request):
@@ -34,6 +46,7 @@ def register(request):
             new_user.save()
 
             Profile.objects.create(user=new_user)
+            create_action(new_user, 'has created an account')
 
             return render(request,
                           'account/register_done.html',
@@ -140,6 +153,7 @@ def user_follow(request):
             if action == 'follow':
                 Contact.objects.get_or_create(user_from=request.user,
                                               user_to=user)
+                create_action(request.user, 'is following', user)
             else:
                 Contact.objects.filter(user_from=request.user,
                                        user_to=user).delete()
