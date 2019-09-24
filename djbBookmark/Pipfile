@@ -4,6 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+jupyter = "*"
+ipython = "*"
+django-extensions = "*"
 
 [packages]
 django = "== 2.0.5"
