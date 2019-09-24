@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from .models import Profile
+from common.decorators import ajax_required
+from .models import Profile, Contact
 from .forms import (
     LoginForm,
     UserRegistrationForm,
@@ -80,26 +82,6 @@ def user_login(request):
 
 
 @login_required
-def user_list(request):
-    users = User.objects.filter(is_active=True)
-    return render(request,
-                  'account/user/list.html',
-                  { 'section': 'people',
-                    'users'  : users })
-
-
-@login_required
-def user_detail(request, username):
-    user = get_object_or_404(User,
-                             username=username,
-                             is_active=True)
-    return render(request,
-                  'account/user/detail.html',
-                  { 'section': 'people',
-                    'user'   : user })
-
-
-@login_required
 def edit_profile(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
@@ -123,3 +105,47 @@ def edit_profile(request):
                   'account/edit_profile.html',
                   { 'user_form'   : user_form,
                     'profile_form': profile_form })
+
+
+@login_required
+def user_list(request):
+    users = User.objects.filter(is_active=True)
+    return render(request,
+                  'account/user/list.html',
+                  { 'section': 'people',
+                    'users'  : users })
+
+
+@login_required
+def user_detail(request, username):
+    user = get_object_or_404(User,
+                             username=username,
+                             is_active=True)
+    return render(request,
+                  'account/user/detail.html',
+                  { 'section': 'people',
+                    'user'   : user })
+
+
+@ajax_required
+@require_POST
+@login_required
+def user_follow(request):
+    user_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if user_id and action:
+        try:
+            user = User.objects.get(id=user_id)
+
+            if action == 'follow':
+                Contact.objects.get_or_create(user_from=request.user,
+                                              user_to=user)
+            else:
+                Contact.objects.filter(user_from=request.user,
+                                       user_to=user).delete()
+            return JsonResponse({ 'status': 'ok' })
+
+        except User.DoesNotExist:
+            return JsonResponse({ 'status': 'ko' })
+
+    return JsonResponse({ 'status': 'ko' })

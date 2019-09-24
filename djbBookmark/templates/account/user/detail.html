@@ -12,14 +12,16 @@
       <img src="{{ img.url }}" class="user-detail" alt="user avatar">
     {% endthumbnail %}
   </div>
-  
+
+  {# The `domready` is related this segment (with .. endwith) #}
   {% with total_followers=user.followers.count %}
     <span class="count">
       <span class="total">
-        {{ total_followers }} follower{{ total_followers|pluralize }}
+        {{ total_followers }}
       </span>
+      follower{{ total_followers|pluralize }}
     </span>
-    
+
     <a href="#"
        class="follow button"
        data-id="{{ user.id }}"
@@ -35,4 +37,30 @@
       {% include "images/image/list_ajax.html" with images=user.images_created.all %}
     </div>
   {% endwith %}
+  {# The `domready` is related this segment (with .. endwith) #}
+
+{% endblock %}
+
+{% block domready %}
+  $('a.follow').click(function (e) {
+    e.preventDefault();
+
+    $.post('{% url "user_follow" %}',
+      {
+        id: $(this).data('id'),
+        action: $(this).data('action'),
+      },
+      function (data) {
+        if (data['status'] == 'ok') {
+          var prev_action = $('a.follow').data('action');
+
+          $('a.follow').data('action', prev_action == 'follow' ? 'unfollow' : 'follow');
+          $('a.follow').text(prev_action == 'follow' ? 'Unfollow' : 'Follow');
+
+          var prev_followers = parseInt($('span.count .total').text());
+          $('span.count .total').text(prev_action == 'follow' ? prev_followers + 1 : prev_followers - 1);
+        }
+      }
+    );
+  });
 {% endblock %}

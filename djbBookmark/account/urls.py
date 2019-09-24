@@ -9,6 +9,7 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name='edit_profile'),
 
     path('users/', views.user_list, name='user_list'),
+    path('users/follow/', views.user_follow, name='user_follow'),
     path('user/<username>/', views.user_detail, name='user_detail'),
 
     # These can be omitted to just one line (`django.contrib.auth.views.urls`)

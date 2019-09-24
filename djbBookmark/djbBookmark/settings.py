@@ -286,7 +286,7 @@ Implementing list/detail views for user profiles
             'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
         }
 
-Implementing user-can-follow-each-other feature (not yet)
+Implementing user-can-follow-each-other feature
     Base setup
     <1> an intermediate model       Contact -> At when(created) who(user_from) FOLLOWED who(user_to)
     <2> a dynamically added field   Contact <> User { user1.followers.all(), user1.following.all() }
@@ -294,6 +294,18 @@ Implementing user-can-follow-each-other feature (not yet)
     
     Do read the doc to gain more understanding of "M2M in Django"
     ~ https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ManyToManyField.through
+
+    It's pretty much the same procedures as how we impl the 'image_like'
+    # Django
+    ~ views     get "param of POST", do opt on database, return JSON-response
+    ~ urls      users/follow/   (do put this before the `user/<username>/` (regex))
+    
+    # Template
+    ~ account/user/detail.html
+        + add variable  for 'total followers'
+        + add class     for "updating the followers count"
+        + add button    for "invoking the bottom JS code (then calling view)" & "update the FOLLOW/UNFOLLOW"
+        + add JS code   modify the `<a>` { access id/action, update data/appearance based on id/action }
 
 
 """
@@ -417,7 +429,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# Alternative way to specify an URL for a model
+# Alternative way to specify an URL for a model (get_absolute_url)
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('user_detail',
