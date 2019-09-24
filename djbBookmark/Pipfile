@@ -4,9 +4,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-jupyter = "*"
-ipython = "*"
-django-extensions = "*"
 
 [packages]
 django = "== 2.0.5"
@@ -15,6 +12,9 @@ psycopg2-binary = "==2.7.4"
 Pillow = "==5.1.0"
 social-auth-app-django = "==2.1.0"
 sorl-thumbnail = "==12.5.0"
+django-extensions = "*"
+ipython = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.6"
