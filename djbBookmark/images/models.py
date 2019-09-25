@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
 from django.urls import reverse
+from django.db.models import Count
 
 
 class Image(models.Model):
@@ -20,6 +21,9 @@ class Image(models.Model):
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='images_liked',
                                         blank=True)
+
+    total_likes = models.PositiveIntegerField(db_index=True,
+                                              default=0)
 
     def __str__(self):
         return self.title
