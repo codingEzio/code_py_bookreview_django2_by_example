@@ -151,3 +151,9 @@ LOGOUT_URL = 'logout'
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 # SOCIAL_AUTH_GOOGLE_OAUTH_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH_KEY')
 # SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH_SECRET')
+
+# Redis in-memory database ('redis' package required)
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
