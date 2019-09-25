@@ -18,7 +18,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'mysite.com',  # add `127.0.0.1 mysite.com` to /etc/hosts
-    'ec231e41.ngrok.io',
+    os.environ.get('NGROK_FORWARD_LINK'),
 ]
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     'social_django',
     'sorl.thumbnail',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
