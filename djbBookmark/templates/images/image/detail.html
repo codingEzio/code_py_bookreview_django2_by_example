@@ -20,6 +20,9 @@
 				<span class="count">
 					<span class="total">{{ total_likes }} </span> like{{ total_likes|pluralize }}
 				</span>
+        <span class="count">
+          {{ total_views }} view{{ total_views|pluralize }}
+        </span>
 				<a href="#" class="like button"
 				   data-id="{{ image_inst.id }}"
 				   data-action="{% if request.user in users_like %}un{% endif %}like">

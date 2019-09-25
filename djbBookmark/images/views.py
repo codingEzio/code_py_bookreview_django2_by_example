@@ -79,10 +79,15 @@ def image_list(request):
 
 def image_detail(request, image_id, slug):
     image = get_object_or_404(Image, id=image_id, slug=slug)
+
+    total_views = redis_inst.incr(f'image:{image.id}:views')  # image:X:Y as key
+    redis_inst.zincrby('image_ranking', image.id, 1)
+
     return render(request,
                   'images/image/detail.html',
-                  { 'section'   : 'images',
-                    'image_inst': image })
+                  { 'section'    : 'images',
+                    'image_inst' : image,
+                    'total_views': total_views })
 
 
 @ajax_required
@@ -109,3 +114,18 @@ def image_like(request):
             raise SystemError("HOLY FUCK id+action")
 
     return JsonResponse({ 'status': 'ko' })
+
+
+@login_required
+def image_ranking(request):
+    image_rankin = redis_inst.zrange('image_ranking', 0, -1,
+                                     desc=True)[:10]
+    image_ranking_ids = [int(id) for id in image_rankin]
+
+    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
+    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
+
+    return render(request,
+                  'images/image/ranking.html',
+                  { 'section'    : 'images',
+                    'most_viewed': most_viewed })
