@@ -9,6 +9,13 @@ from .forms import CartAddProductForm
 def cart_detial(request):
     cart = Cart(request)
 
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(
+            initial={
+                'quantity': item['quantity'],
+                'update': True
+            })
+
     return render(request=request,
                   template_name='cart/detail.html',
                   context={'cart': cart})
