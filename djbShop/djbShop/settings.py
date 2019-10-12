@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # dev
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
     # tool
     'django_extensions',
 ]
