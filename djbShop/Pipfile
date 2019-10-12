@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-yapf = "==0.28.0"
+black = "==19.3b0"
 pylama = "==7.7.1"
 
 [packages]
