@@ -1,9 +1,23 @@
 import os
 from celery import Celery
 
+# Essential component to get Celery running
+# - PROJ/__init__.py
+# - PROJ/celery.py
+# - APP/tasks.py
+
+# Get celery running!
+# 1. rabbitmq-server                        amaq
+# 2. ./manage.py runserver                  well, try "complete an order, eh?"
+# 3. celery -A PROJ_NAME worker -l info     run the worker and ready to process tasks
+# 4. celery -A PROJ_NAME flower             web-based monitoring tool (optional) (empty?!)
+
 # set environment variable
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djbShop.settings')
 
+# When to use asynchronous tasks (examples)
+# ~ time-consuming processes                        e.g. sending mail
+# ~ processes that are subjected to conn failures   e.g. RETRY IT!
 app = Celery(main='djbShop')
 
 # all of the celery-related settings will be stored in 'settings.py'
