@@ -24,7 +24,7 @@ def order_create(request):
             cart.clear()
 
             # async tasks powered by celery yo!
-            order_created(order_id=order.id)
+            order_created.delay(order_id=order.id)
 
             return render(request=request,
                           template_name='orders/order/created.html',
