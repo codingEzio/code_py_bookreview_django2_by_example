@@ -128,3 +128,15 @@ STATICFILES_DIRS = [
 # Session-related configration
 
 CART_SESSION_ID = 'cart'
+
+# Email configuration
+# ~ The one we configured is being as a sender,
+# ~ for sender's side, I currently use 'https://temp-mail.org/' for testing.
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
