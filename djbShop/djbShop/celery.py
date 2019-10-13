@@ -9,8 +9,8 @@ from celery import Celery
 # Get celery running!
 # 1. rabbitmq-server                        amaq
 # 2. ./manage.py runserver                  well, try "complete an order, eh?"
-# 3. celery -A PROJ_NAME worker -l info     run the worker and ready to process tasks
-# 4. celery -A PROJ_NAME flower             web-based monitoring tool (optional) (empty?!)
+# 3. celery -A PROJ_NAME worker -l info     run the worker & ready to process tasks
+# 4. celery -A PROJ_NAME flower             web-based monitoring tool (optional)
 
 # set environment variable
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djbShop.settings')
