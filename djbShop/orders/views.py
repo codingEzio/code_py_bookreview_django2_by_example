@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
+from cart.cart import Cart
+
 from .models import OrderItem
 from .forms import OrderCreateForm
-from cart.cart import Cart
+from .tasks import order_created
 
 
 def order_create(request):
@@ -20,6 +22,9 @@ def order_create(request):
                                          price=item['price'],
                                          quantity=item['quantity'])
             cart.clear()
+
+            # async tasks powered by celery yo!
+            order_created(order_id=order.id)
 
             return render(request=request,
                           template_name='orders/order/created.html',
