@@ -1,14 +1,14 @@
 from os import environ
 
 from django.core.mail import send_mail
-from celery import task
+from celery import shared_task
 
 from .models import Order
 
 MAIL_SENDER = environ.get('EMAIL_HOST_USER')
 
 
-@task
+@shared_task
 def order_created(order_id):
     """
     Task to send an email notification when an order is created.
