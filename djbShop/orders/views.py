@@ -23,8 +23,17 @@ def order_create(request):
                                          quantity=item['quantity'])
             cart.clear()
 
-            # async tasks powered by celery yo!
-            order_created.delay(order_id=order.id)
+            # If I send the mail synchorously, everything is fine (since it
+            # doesn't have relations with Celery|RabbitMQ).
+            # But when I added the `.delay`, it stopped working, specifically,
+            # the 'tasks.py', i.e. this doesn't work: Order.objects.get(id=order_id),
+            # an error was raised called 'relation "orders_order" does not exist' (ah)
+            order_created(order_id=order.id)
+
+            # In short, the current status is:
+            #   async-send email    NOT WORKING
+            #   sync-send email     WORKING (if I removed the '.delay')
+            #   creating orders     WORKING
 
             return render(request=request,
                           template_name='orders/order/created.html',

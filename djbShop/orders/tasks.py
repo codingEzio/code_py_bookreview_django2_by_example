@@ -11,8 +11,10 @@ MAIL_SENDER = environ.get('EMAIL_HOST_USER')
 @task
 def order_created(order_id):
     """
-    Task to send an email notification when an order is created. 
+    Task to send an email notification when an order is created.
     """
+
+    # current status: relation "orders_order" does not exist
     order = Order.objects.get(id=order_id)
 
     subject = f'Order nr. {order.id}'
