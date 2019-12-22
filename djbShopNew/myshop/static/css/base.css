@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Verdana, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+        'Lucida Sans Unicode', Geneva, sans-serif;
 }
 
 h1,
@@ -10,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'PT Serif', Georgia, 'Times New Roman', Times, serif;
     font-weight: normal;
 }
 
@@ -24,7 +25,7 @@ a:hover {
 }
 
 a.button,
-input[type="submit"] {
+input[type='submit'] {
     color: #fff;
     background: #5993bb;
     border-radius: 4px;
@@ -87,7 +88,7 @@ tbody td.num {
     text-align: right;
 }
 
-td input[type="submit"] {
+td input[type='submit'] {
     font-size: 12px;
     padding: 4px 10px;
 }
@@ -123,7 +124,6 @@ ul.errorlist {
     padding: 0;
 }
 
-
 #header {
     padding: 10px 100px;
     font-size: 18px;
@@ -138,7 +138,8 @@ ul.errorlist {
 }
 
 #header .logo {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'PT Serif Caption', Georgia, 'Times New Roman', Times,
+        serif;
     float: left;
     color: #333;
     font-size: 22px;
@@ -206,7 +207,7 @@ ul.errorlist {
 }
 
 .product-detail {
-    text-align: justify;
+    /* text-align: justify; */
 }
 
 .product-detail .price {
@@ -298,7 +299,7 @@ ul.errorlist {
 }
 
 .recommendations img {
-    width: 200px
+    width: 200px;
 }
 
 .recommendations p {
