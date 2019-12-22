@@ -1,5 +1,6 @@
 
 # Anything else
+**/.env
 **/media/
 *.rdb
 .idea
