@@ -1,0 +1,27 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "==19.3b0"
+flake8 = "==3.7.8"
+
+[packages]
+# core
+django = "==3.0.0"
+python-dotenv = "==0.10.3"
+# dev enhancement
+jupyter = "==1.0.0"
+ipython = "==7.10.2"
+django-extensions = "==2.2.5"
+django-debug-toolbar = "==2.1"
+# db related
+psycopg2-binary = "==2.8.4"
+Pillow = "==6.2.1"
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
