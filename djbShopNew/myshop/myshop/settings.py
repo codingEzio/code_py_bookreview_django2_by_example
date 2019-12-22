@@ -100,7 +100,7 @@ USE_TZ = True
 
 # Application-related files (CSS, JavaScript, Images etc.)
 STATIC_URL = "/static/"
-STATICFILESS_DIRS = [os.path.join(BASE_DIR, "static/")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
 # User-uploaded files (different from the purpose of 'STATIC_XXXX')
 MEDIA_URL = "/media/"
