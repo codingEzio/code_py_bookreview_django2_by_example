@@ -8,7 +8,7 @@
 - Initialize project & apps
   ```bash
   $ django-admin startproject myshop && cd myshop
-  $ django-admin startapp     cart
+  $ django-admin startapp     shop
   ```
 
 - Create needed folders
@@ -29,14 +29,14 @@
   ]
   ```
 
-- Configure new *app* <u>cart</u> <small>(multiple files)</small>
+- Configure new *app* <u>shop</u> <small>(multiple files)</small>
   ```python
   # settings.py
   INSTALLED_APPS = [
     "shop.apps.ShopConfig",
   ]
 
-  # urls.py    (PROJ/cart/urls.py) (create it if you don't have one)
+  # urls.py    (PROJ/shop/urls.py) (create it if you don't have one)
   from django.urls import path
   from .           import views
   app_name = "shop"
@@ -44,7 +44,7 @@
   # urls.py    (project-level)
   from django.urls import include
   urlpatterns = [
-    # add to the bottom of 'urlpatterns' (MUST)
+    # comment this out if havn't got any patterns in 'shop/urls.py'
     path("", include("shop.urls", namespace="shop",)),
   ]
   ```
