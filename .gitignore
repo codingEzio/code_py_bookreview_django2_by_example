@@ -2,7 +2,6 @@
 # Anything else
 **/.env
 **/*.sqlite3
-**/static/
 **/media/
 *.rdb
 .idea
