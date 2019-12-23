@@ -26,6 +26,39 @@ class Cart(object):
 
         self.cart = cart
 
+    def __iter__(self):
+        """
+        Iterating over the items in the cart & get the products from the DB.
+        """
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+
+        cart = self.cart.copy()
+        for product in products:
+            cart[str(product.id)]["product"] = product
+
+        for item in cart.values():
+            item["price"] = Decimal(item["price"])
+            item["total_price"] = item["price"] * item["quantity"]
+            yield item
+
+    def __len__(self):
+        """
+        Count all items in the cart.
+        """
+        return sum(item["quantity"] for item in self.cart.values())
+
+    def save(self):
+        # Mark the session as "modified" to make sure it gets saved
+        #   https://docs.djangoproject.com/en/3.0/topics/http/sessions/#when-sessions-are-saved
+        self.session.modified = True
+
+    def get_total_price(self):
+        return sum(
+            Decimal(item["price"]) * item["quantity"]
+            for item in self.cart.values()
+        )
+
     def add(self, product, quantity, update_quantity=False):
         """
         Add a product to the cart or update its quantity.
@@ -53,7 +86,7 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
-    def save(self):
-        # Mark the session as "modified" to make sure it gets saved
-        #   https://docs.djangoproject.com/en/3.0/topics/http/sessions/#when-sessions-are-saved
-        self.session.modified = True
+    def clear(self):
+        # remove cart from session
+        del self.session[settings.CART_SESSION_ID]
+        self.save()
