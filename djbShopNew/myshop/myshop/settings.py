@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # shop
     "shop.apps.ShopConfig",
+    "cart.apps.CartConfig",
     # dev
     "django_extensions",
     "debug_toolbar",
@@ -110,6 +111,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 # Email
 
 EMAIL_BACKEND = os.getenv("CURRENT_EMAIL_BACKEND")
+
+
+# Session
+
+CART_SESSION_ID = 'cart'
 
 
 # Third-party libraries' configurations
