@@ -53,6 +53,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "cart.context_processors.cart",
             ]
         },
     }
@@ -115,7 +116,7 @@ EMAIL_BACKEND = os.getenv("CURRENT_EMAIL_BACKEND")
 
 # Session
 
-CART_SESSION_ID = 'cart'
+CART_SESSION_ID = "cart"
 
 
 # Third-party libraries' configurations

@@ -20,11 +20,23 @@
         <div id="header">
             <a href="/" class="logo">My shop</a>
         </div>
+
         <div id="subheader">
             <div class="cart">
-                Your cart is empty.
+                {% with cart_global|length as total_items %}
+                    {% if cart_global|length > 0 %}
+                        Your cart
+                        <a href="{% url 'cart:cart_detail' %}">
+                            {{ total_items }} item{{ total_items|pluralize }},
+                            ${{ cart_global.get_total_price }}
+                        </a>
+                    {% else %}
+                        Your cart is empty.
+                    {% endif %}
+                {% endwith %}
             </div>
         </div>
+
         <div id="content">
             {% block content %} {% endblock content %}
         </div>
