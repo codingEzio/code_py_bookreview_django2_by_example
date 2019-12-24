@@ -120,7 +120,7 @@ EMAIL_BACKEND = os.getenv("CURRENT_EMAIL_BACKEND")
 CART_SESSION_ID = "cart"
 
 
-# Third-party libraries' configurations
+# Third-party libraries :: Debugging
 
 DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.versions.VersionsPanel",
@@ -137,3 +137,18 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
 ]
+
+
+# Third-party libraries :: Task queue
+
+# If you're using RabbitMQ, you don't need any initial configurations.
+# For Redis, you need a bit of work, see these links for more:
+# ~ https://stackabuse.com/asynchronous-tasks-using-flask-redis-and-celery/
+# ~ https://docs.celeryproject.org/en/latest/getting-started/brokers/redis.html
+# ~ https://docs.celeryproject.org/en/latest/getting-started/brokers/rabbitmq.html
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+
+# Execute tasks locally in a synchronous way instead of sending them
+# into a queue. Add this if you wanna disable Celery temporarily.
+# CELERY_ALWAYS_EAGER = True
