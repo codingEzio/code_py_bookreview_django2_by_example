@@ -1,0 +1,64 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+Your shopping cart
+{% endblock title %}
+
+{% block content %}
+<h1>Your shopping cart</h1>
+
+<table class="cart">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+            <th>Unit</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for cart_inst in cart_session %}
+        {% with cart_inst.product as product %}
+            <tr>
+                <td>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img alt="Product image"
+                             src="{% if product.image %}{{ product.image.url }}
+                                  {% else %}{% static "img/no_image.png" %}{% endif %}"
+                        >                        
+                    </a>
+                </td>
+
+                <td>{{ product.name }}</td>
+                <td>{{ cart_inst.quantity }}</td>
+                <td>
+                    <a href="{% url 'cart:cart_remove' product.id %}">
+                        Remove
+                    </a>
+                </td>
+
+                <td class="num">${{ cart_inst.price }}</td>
+                <td class="num">${{ cart_inst.total_price }}</td>
+            </tr>
+        {% endwith %}
+    {% endfor %}
+
+    <tr class="total">
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td class="num">${{ cart_inst.get_total_price }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<p class="text-right">
+    <a href="{% url 'shop:product_list' %}" class="button light">
+        Continue shopping
+    </a>
+    <a href="#" class="button">Checkout</a>
+</p>
+{% endblock content %}
