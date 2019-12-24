@@ -16,6 +16,10 @@ jupyter = "==1.0.0"
 ipython = "==7.10.2"
 django-extensions = "==2.2.5"
 django-debug-toolbar = "==2.1"
+# task-queue (requires a message broker, RMQ or Redis)
+celery = "==4.4.0"
+# monitor tool
+flower = "==0.9.3"
 # db related
 psycopg2-binary = "==2.8.4"
 Pillow = "==6.2.1"
