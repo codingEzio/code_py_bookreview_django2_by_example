@@ -14,3 +14,9 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 
 # Searches packages for a “tasks.py” module (e.g. orders/tasks.py)
 app.autodiscover_tasks()
+
+# Keep Django & Message broker services running first!
+# Commands (for more run 'celery --help')
+# >> celery worker --app=myshop --loglevel=INFO
+# >> celery flower --app=myshop --address=127.0.0.1 --port=10000
+pass
