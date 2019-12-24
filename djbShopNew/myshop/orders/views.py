@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .cart import CartSession as SessionCart
+from cart.cart import Cart as SessionCart
 from .models import Order, OrderItem
 from .forms import OrderCreateForm
 
