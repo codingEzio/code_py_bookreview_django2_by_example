@@ -8,10 +8,10 @@ from .forms import OrderCreateForm
 def order_create(request):
     cart_session = SessionCart(request)
 
-    form = OrderCreateForm(request.POST)
-    if form.is_valid():
+    order_create_form = OrderCreateForm(request.POST)
+    if order_create_form.is_valid():
         # The 'Order' part
-        order_table_inst = form.save()
+        order_table_inst = order_create_form.save()
 
         # The 'OrderItem' part
         for cart_inst in cart_session:
@@ -29,10 +29,13 @@ def order_create(request):
             context={"order_table_inst": order_table_inst},
         )
     else:
-        form = OrderCreateForm()
+        order_create_form = OrderCreateForm()
 
     return render(
         request=request,
         template_name="orders/order/create.html",
-        context={"cart_session": cart_session, "form": form},
+        context={
+            "cart_session": cart_session,
+            "order_create_form": order_create_form,
+        },
     )
