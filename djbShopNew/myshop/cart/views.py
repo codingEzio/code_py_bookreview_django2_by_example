@@ -14,11 +14,24 @@ __doc__ = """Notes:
     cart_detail     simply displaying the cart page (based on 'base.html' ofc)
     cart_remove     being used inside the cart page (eh)
     cart_add        being called to process the form & do sth based on the data
+
+  Also, for the dict part,
+    we often use `KEY[VAL]` to assign/change values, in the template
+    we kinda always use dot notation (e.g. VAR.update_quantity_form.quantity)
 """
 
 
 def cart_detail(request):
     cart_session = SessionCart(request)
+
+    # We actually have used this form before
+    #   shop/product/detail.html    simply "add to cart"
+    #   cart/detail.html            used for 'update" existing quantities
+    for cart_inst in cart_session:
+        cart_inst["update_quantity_form"] = CartAddProductForm(
+            initial={"quantity": cart_inst["quantity"], "update": True}
+        )
+
     return render(
         request=request,
         template_name="cart/detail.html",
