@@ -10,4 +10,9 @@ urlpatterns = [
         view=views.admin_order_detail,
         name="admin_order_detail",
     ),
+    path(
+        route="admin/order/<int:order_id>/pdf/",
+        view=views.admin_order_pdf,
+        name="admin_order_pdf",
+    ),
 ]

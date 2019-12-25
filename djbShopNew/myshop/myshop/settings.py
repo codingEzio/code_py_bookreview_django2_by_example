@@ -103,7 +103,6 @@ USE_TZ = True
 
 # Application-related files (CSS, JavaScript, Images etc.)
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
 # Well, for my part, I've put all the (static) files directly into
 # the 'PROJECT/static/' folder. As for the other people's method,
@@ -111,6 +110,13 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 # it's 'cart/templates/cart/*' and 'cart/static/cart/*' (the 'cart'
 # before the '*' was meant to "naming" each apps).
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# An error being raised
+#   "The STATICFILES_DIRS setting should not contain the STATIC_ROOT setting"
+# Solution
+#   The short one     This config shouldn't contain the `STATIC_ROOT` path
+#   The long  one     https://stackoverflow.com/a/12161409/6273859
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
 # User-uploaded files (different from the purpose of 'STATIC_XXXX')
 MEDIA_URL = "/media/"

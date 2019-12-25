@@ -48,14 +48,22 @@ def export_to_csv(modeladmin, request, queryset):
     return response
 
 
-export_to_csv.short_description = "Export to CSV"
-
-
 def order_detail(obj):
-    admin_order_detail_link = reverse(
+    link_admin_order_detail = reverse(
         viewname="orders:admin_order_detail", args=[obj.id]
     )
-    return mark_safe(f"<a href='{admin_order_detail_link}'>View</a>")
+    return mark_safe(f"<a href='{link_admin_order_detail}'>View</a>")
+
+
+def order_pdf(obj):
+    link_admin_order_pdf = reverse(
+        viewname="orders:admin_order_pdf", args=[obj.id]
+    )
+    return mark_safe(f"<a href={link_admin_order_pdf}>PDF</a>")
+
+
+export_to_csv.short_description = "Export to CSV"
+order_pdf.short_description = "Invoice"
 
 
 class OrderItemInline(admin.TabularInline):
@@ -70,6 +78,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     list_display = [
         order_detail,
+        order_pdf,
         "id",
         "first_name",
         "last_name",

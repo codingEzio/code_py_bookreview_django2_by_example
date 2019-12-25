@@ -1,5 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+
+import weasyprint
 
 from cart.cart import Cart as SessionCart
 from .models import Order, OrderItem
@@ -53,3 +58,24 @@ def admin_order_detail(request, order_id):
         template_name="admin/orders/order/detail.html",
         context={"order_table_inst": order_table_inst},
     )
+
+
+@staff_member_required
+def admin_order_pdf(request, order_id):
+    order_table_inst = get_object_or_404(Order, id=order_id)
+    html = render_to_string(
+        template_name="orders/order/pdf.html",
+        context={"order_table_inst": order_table_inst},
+    )
+
+    response = HttpResponse(content_type="application/pdf")
+    response[
+        "Content-Disposition"
+    ] = f"filename=order_{order_table_inst.id}.pdf"
+
+    weasyprint.HTML(string=html).write_pdf(
+        response,
+        stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + "css/pdf.css")],
+    )
+
+    return response
