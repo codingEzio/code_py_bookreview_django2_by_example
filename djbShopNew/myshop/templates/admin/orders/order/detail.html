@@ -1,0 +1,25 @@
+{% extends 'admin/base_site.html' %} <!-- Django file -->
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'admin/css/base.css' %}"> <!-- Local file -->
+{% endblock extrastyle %}
+
+{% block title %}
+    Order {{ order_table_inst.id }} {{ block.super }}
+{% endblock title %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">
+            Home
+        </a>&rsaquo;
+        <a href="{% url 'admin:orders_order_changelist' %}">
+            Orders
+        </a>&rsaquo;
+        <a href="{% url 'admin:orders_order_change' order_table_inst.id %}">
+            Order {{ order_table_inst.id }}
+        </a>&rsaquo; Detail
+    </div>
+{% endblock breadcrumbs %}
