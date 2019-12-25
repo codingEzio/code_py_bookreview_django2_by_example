@@ -23,3 +23,84 @@
         </a>&rsaquo; Detail
     </div>
 {% endblock breadcrumbs %}
+
+{% block content %}
+    {% comment %} Order info (where, who) {% endcomment %}
+    <h1>Order {{ order_table_inst.id }}</h1>
+    <ul class="object-tools">
+        <li>
+            <a href="#" onclick="window.print()">Print order</a>
+        </li>
+    </ul>
+
+    <table>
+        <tr>
+            <td>Created</td>
+            <td>{{ order_table_inst.created }}</td>
+        </tr>
+        <tr>
+            <td>Customer</td>
+            <td>{{ order_table_inst.first_name }} {{ order_table_inst.last_name }}</td>
+        </tr>
+        <tr>
+            <td>E-mail</td>
+            <td>
+                <a href="mailto:{{ order_table_inst.email }}">
+                    {{ order_table_inst.email }}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+                {{ order_table_inst.address }}, 
+                {{ order_table_inst.postal_code }} {{ order_table_inst.city }}
+            </td>
+        </tr>
+        <tr>
+            <td>Total amount</td>
+            <td>${{ order_table_inst.get_total_cost }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                {% if order_table_inst.paid %}Paid
+                {% else %}Pending payment
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    {% comment %} Cart info (price, quantity, total cost) {% endcomment %}
+    <br/>
+    <div class="module">
+        <div class="tabular inline-related last-related">
+            <table>
+                <h2>Items bought</h2>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in order_table_inst.items.all %}
+                     <tr class="row{% cycle "1" "2" %}">
+                         <td>{{ item.product.name }}</td>
+                         <td class="num">${{ item.price }}</td>
+                         <td class="num">{{ item.quantity }}</td>
+                         <td class="num">${{ item.get_cost }}</td>
+                     </tr>
+                    {% endfor %}
+                    <tr class="total">
+                        <td colspan="3">Total</td>
+                        <td class="num">${{ order_table_inst.get_total_cost }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
