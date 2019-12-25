@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "shop.apps.ShopConfig",
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
+    "coupons.apps.CouponsConfig",
     # dev
     "django_extensions",
     "debug_toolbar",

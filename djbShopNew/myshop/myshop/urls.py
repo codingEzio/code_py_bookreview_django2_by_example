@@ -10,6 +10,10 @@ urlpatterns = [
     path(
         route="orders/", view=include(arg="orders.urls", namespace="orders")
     ),
+    path(
+        route="coupons/",
+        view=include(arg="coupons.urls", namespace="coupons"),
+    ),
     path(route="", view=include("shop.urls", namespace="shop")),
 ]
 
