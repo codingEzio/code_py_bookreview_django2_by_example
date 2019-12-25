@@ -1,6 +1,15 @@
 ### Tips
 - Wanna try something without actually *running* it?
   ```./manage.py THE_COMMAND --dry-run```
+- About *static files*, or `./manage.py collectstatic`
+  - Basically, what it does is simply "*copying files from XXX to* `STATIC_ROOT`"
+  - The *XXX* might be these places:
+    1. Django's built-in static files, like *template*, *CSS* etc. <small>(extending admin? this is the one)</small>
+    2. Static files under each apps. One way of organizing things, i.e. `app/{templates|static}/app/FILES`</small>
+  - Oh, "*one*" more thing
+    - Files that already *in* the folder <small>(i.e. `STATIC_ROOT`)</small> *will* **NOT** be touched.
+    - Folders under `STATICFILES_DIRS` will also be copied to the `STATIC_ROOT` directory.
+    - The command `collectstatic` *can* be runned at *any* time <small>(before starting the server)</small>, since it's just *static files*.
 
 ### Getting Started
 - Install packages
