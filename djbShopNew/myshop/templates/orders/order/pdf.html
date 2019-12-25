@@ -1,0 +1,54 @@
+<html>
+<body>
+    <h1>My shop</h1>
+    <p>
+        Invoice no. {{ order_table_inst.id }}
+        <span class="secondary">
+            {{ order_table_inst.created|date:"M d, Y"}}
+        </span>
+    </p>
+
+    <h3>Bill to</h3>
+    <p>
+        {{ order_table_inst.first_name }} {{ order_table_inst.last_name }}<br/>
+        {{ order_table_inst.email }}<br/>
+        {{ order_table_inst.address }}<br/>
+        {{ order_table_inst.postal_code }}, {{ order_table_inst.city }}
+    </p>
+
+    <h3>Items bought</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_table_inst.items.all %}
+                <tr class="row{% cycle "1" "2" %}">
+                    <td>{{ item.product.name }}</td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">{{ item.quantity }}</td>
+                    <td class="num">${{ item.get_cost }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+        <tr class="total">
+            <td colspan="3">Total</td>
+            <td class="num">${{ order_table_inst.get_total_cost }}</td>
+        </tr>
+    </table>
+
+    <span class="{% if order_table_inst.paid %}paid{% else %}pending{% endif %}">
+        {% if order_table_inst.paid %}
+            Paid
+        {% else %}
+            Pending payment
+        {% endif %}
+    </span>
+</body>
+</html>
