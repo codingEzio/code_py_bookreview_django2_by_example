@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.admin.views.decorators import staff_member_required
 
 from cart.cart import Cart as SessionCart
 from .models import Order, OrderItem
@@ -41,4 +42,14 @@ def order_create(request):
             "cart_session": cart_session,
             "order_create_form": order_create_form,
         },
+    )
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    order_table_inst = get_object_or_404(Order, id=order_id)
+    return render(
+        request=request,
+        template_name="admin/orders/order/detail.html",
+        context={"order_table_inst": order_table_inst},
     )
