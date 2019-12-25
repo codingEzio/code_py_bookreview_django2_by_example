@@ -10,6 +10,20 @@
     - Files that already *in* the folder <small>(i.e. `STATIC_ROOT`)</small> *will* **NOT** be touched.
     - Folders under `STATICFILES_DIRS` will also be copied to the `STATIC_ROOT` directory.
     - The command `collectstatic` *can* be runned at *any* time <small>(before starting the server)</small>, since it's just *static files*.
+    - Normally <small>(**during development**)</small>, you *DON'T NEED TO TOUCH THIS* <small>(`collectstatic`)</small>.
+- Static files during *dev* & *prod*
+  - Note
+    - There're already lots of notes inside the `settings.py`, please *go check it out*.
+    - Some posts helped me directly, some of them are more like *oh.. that's where things gone wrong..*.
+  
+  - Here are some *extremly useful* posts
+    1. [Github search `STATICFILES_DIRS settings.py` <small>(posts & config, **amazing**!)</small>](https://github.com/search?q=STATICFILES_DIRS+settings.py&type=Code)
+    2. [Django設置模闆中 CSS JS 路徑的方法.md](https://github.com/doraemonext/BlogPost/blob/fa7c59535ffffdbd11e8ede04f95d75bd2696e9a/534-Django%E8%AE%BE%E7%BD%AE%E6%A8%A1%E6%9D%BF%E4%B8%AD%20CSS%20JS%20%E8%B7%AF%E5%BE%84%E7%9A%84%E6%96%B9%E6%B3%95.md)  <small>(havn't *read* yet)</small>
+    3. [Django 的 STATIC_ROOT 與 STATICFILES_DIRS 的區别.md](https://github.com/xiaomabenten/blog/blob/5eef7892a20edfe7a6a220067c7063e6a377e7bd/content/post/django%E7%9A%84STATIC_ROOT%E4%B8%8ESTATICFILES_DIRS%E7%9A%84%E5%8C%BA%E5%88%AB.md) <small>(*read*, *extremely helpful*)</small>
+    4. [st Handling static files that dont pertain to an app in Django](https://stackoverflow.com/questions/22976596/handling-static-files-that-dont-pertain-to-an-app-in-django)
+    5. [st serving static files on Django production tutorial](https://stackoverflow.com/a/29087858/6273859)
+    6. [Django Static Files](https://rahmonov.me/posts/django-static-files/) <small>(*read*, *extremely helpful*)</small>
+
 
 ### Getting Started
 - Install packages
