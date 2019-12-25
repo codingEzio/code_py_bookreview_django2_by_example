@@ -103,21 +103,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 # Application-related files (CSS, JavaScript, Images etc.)
+
+# When you go into production phase, this also needs to be changed
 STATIC_URL = "/static/"
 
 # Well, for my part, I've put all the (static) files directly into
-# the 'PROJECT/static/' folder. As for the other people's method,
-# the static files might be put under each apps, i.e. for app 'cart',
-# it's 'cart/templates/cart/*' and 'cart/static/cart/*' (the 'cart'
-# before the '*' was meant to "naming" each apps).
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+# the 'PROJECT/static/' (DO NOT DO THAT AGAIN!!!) folder. As for
+# (every) other people's method, the files might be put under each apps,
+# e.g. for app 'cart',
+#   it's 'cart/templates/cart/*' and 'cart/static/cart/*'.
+#   The 'cart' before the '*' was meant to "naming" each apps.
+# One last thing, for this folder (see https://bit.ly/376I4uA)
+# ~ it  is     NOT  for development (STATICFILES_DIRS does)
+# ~ it  should be   served by a webserver (e.g. Nginx)
+# ~ you should NOT  put anything into it (manually)
+# ~ you should only run 'collectstatic' to pour the files into it
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
 # An error being raised
 #   "The STATICFILES_DIRS setting should not contain the STATIC_ROOT setting"
-# Solution
+# Solution (only a temporary one)
 #   The short one     This config shouldn't contain the `STATIC_ROOT` path
 #   The long  one     https://stackoverflow.com/a/12161409/6273859
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
+# Other than that, you should know (summed thoughts, maybe not 100% correct)
+# - folders list here would be the one '{% static 'FILE' %}' point to
+# - :dev , simply use '.. = [os.path.join(BASE_DIR, YOUR_STATIC_FILES/)]'
+# - :prod, 'collectstatic', copy all the files to '.._ROOT' (Nginx serves it)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
 # User-uploaded files (different from the purpose of 'STATIC_XXXX')
 MEDIA_URL = "/media/"
