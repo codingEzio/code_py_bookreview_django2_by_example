@@ -1,3 +1,7 @@
+### Tips
+- Wanna try something without actually *running* it?
+  ```./manage.py THE_COMMAND --dry-run```
+
 ### Getting Started
 - Install packages
   ```bash
