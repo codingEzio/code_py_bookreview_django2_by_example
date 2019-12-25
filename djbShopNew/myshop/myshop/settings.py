@@ -105,6 +105,13 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
+# Well, for my part, I've put all the (static) files directly into
+# the 'PROJECT/static/' folder. As for the other people's method,
+# the static files might be put under each apps, i.e. for app 'cart',
+# it's 'cart/templates/cart/*' and 'cart/static/cart/*' (the 'cart'
+# before the '*' was meant to "naming" each apps).
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
 # User-uploaded files (different from the purpose of 'STATIC_XXXX')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
