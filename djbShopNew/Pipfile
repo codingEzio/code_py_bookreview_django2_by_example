@@ -24,6 +24,8 @@ flower = "==0.9.3"
 # db related
 psycopg2-binary = "==2.8.4"
 Pillow = "==6.2.1"
+# generate PDF
+WeasyPrint = "==0.42.3"
 
 [requires]
 python_version = "3.7"
