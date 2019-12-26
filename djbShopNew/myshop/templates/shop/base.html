@@ -28,7 +28,7 @@
                         Your cart
                         <a href="{% url 'cart:cart_detail' %}">
                             {{ total_items }} item{{ total_items|pluralize }},
-                            ${{ cart_global.get_total_price }}
+                            ${{ cart_global.get_total_price_after_discount }}
                         </a>
                     {% else %}
                         Your cart is empty.
