@@ -62,6 +62,12 @@ Your shopping cart
     </tbody>
 </table>
 
+<p>Apply a coupon</p>
+<form action="{% url 'coupons:apply' %}" method="POST">
+    {{ coupon_apply_form }} {% csrf_token %}
+    <input type="submit" value="Apply">
+</form>
+
 <p class="text-right">
     <a href="{% url 'shop:product_list' %}" class="button light">
         Continue shopping
