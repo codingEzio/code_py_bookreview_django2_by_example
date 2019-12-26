@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
-from shop.models import Product
 from .cart import Cart as SessionCart
+
+from shop.models import Product
 from .forms import CartAddProductForm
+from coupons.forms import CouponApplyForm
 
 
 __doc__ = """Notes:
@@ -22,6 +24,36 @@ __doc__ = """Notes:
 
 
 def cart_detail(request):
+    """
+    Notes on the "coupons":
+      In the first time we visit view 'cart_detail' (=> cart/detail.html),
+      it's not that special.
+
+      But when we click the 'Apply' on the form, it "finds" the ID as an
+      model instance then "redirect" us to this view again, but now we
+      HAVE a `coupon_id` for `cart_session` (cart/cart.py) to process/calc.
+
+      After the `coupon_apply`, the `coupon_id` was stored in the session,
+      which can also be accessed by our 'session' (cart/cart.py : Cart).
+
+      The (2nd time being invoked) 'cart_session' was initializaed with
+      all the calculated result based on the `coupon_id` (e.g. discount).
+
+      Right now, we CAN pass the calculated stuff to the 'cart/detail.html',
+      of course, after finished "this part" (displaying cart detail), the
+      "calculated result" (of instance 'cart_session') still exists, so we
+      can still do something about it (all we need is an init to calc res).
+
+      One more thing about "session_cart",
+        part of the job was being done in the `Cart` (& initialization)
+        part of the job was simply "storing the key in the browser's session"
+
+        Actual process
+        1. get the data (from browers' session)
+        2. process(while being initialized) based on all the data we got
+    """
+
+    # Calc all the results we need when being initialized
     cart_session = SessionCart(request)
 
     # We actually have used this form before
@@ -31,11 +63,15 @@ def cart_detail(request):
         cart_inst["update_quantity_form"] = CartAddProductForm(
             initial={"quantity": cart_inst["quantity"], "update": True}
         )
+    coupon_apply_form = CouponApplyForm()
 
     return render(
         request=request,
         template_name="cart/detail.html",
-        context={"cart_session": cart_session},
+        context={
+            "cart_session": cart_session,
+            "coupon_apply_form": coupon_apply_form,
+        },
     )
 
 
