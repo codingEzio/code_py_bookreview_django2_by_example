@@ -10,14 +10,23 @@
     <div class="order-info">
         <h3>Your order</h3>
         <ul>
-            {% for cart_inst in cart_session %}
-            <li>
-                {{ cart_inst.quantity }}x {{ cart_inst.product.name }}
-                <span>${{ cart_inst.total_price }}</span>
-            </li>
+            {% for item in cart_session %}
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>${{ item.total_price|floatformat:"2" }}</span>
+                </li>
             {% endfor %}
+
+            {% if cart_session.coupon %}
+                <li>
+                    "{{ cart_session.coupon.coupon_code }}" ({{ cart_session.coupon.discount }}% off)
+                    <span>- ${{ cart_session.get_discount|floatformat:"2" }}</span>
+                </li>
+            {% endif %}
         </ul>
-        <p>Total: ${{ cart_session.get_total_price }}</p>
+        <p>
+            Total: ${{ cart_session.get_total_price_after_discount|floatformat:"2" }}
+        </p>
     </div>
 
     <form action="." method="post" class="order-form">
