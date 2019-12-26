@@ -54,10 +54,28 @@ Your shopping cart
         {% endwith %}
     {% endfor %}
 
+    {% if cart_session.coupon %}
+        <tr class="subtotal">
+            <td>Subtotal</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart_session.get_total_price|floatformat:"2" }}</td>
+        </tr>
+        <tr>
+            <td>
+                "{{ cart_session.coupon.coupon_code }}" coupon
+                ({{ cart_session.coupon.discount }}% off)
+            </td>
+            <td colspan="4"></td>
+            <td class="num neg">
+                - ${{ cart_session.get_discount|floatformat:"2" }}
+            </td>
+        </tr>
+    {% endif %}
+
     <tr class="total">
         <td>Total</td>
         <td colspan="4"></td>
-        <td class="num">${{ cart_session.get_total_price }}</td>
+        <td class="num">${{ cart_session.get_total_price_after_discount|floatformat:"2" }}</td>
     </tr>
     </tbody>
 </table>
