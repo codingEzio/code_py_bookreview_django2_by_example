@@ -18,7 +18,11 @@ def order_create(request):
     order_create_form = OrderCreateForm(request.POST)
     if order_create_form.is_valid():
         # The 'Order' part
-        order_table_inst = order_create_form.save()
+        order_table_inst = order_create_form.save(commit=False)
+        if cart_session.coupon:
+            order_table_inst.coupon = cart_session.coupon  # fk VS class attr
+            order_table_inst.discount = cart_session.coupon.discount
+        order_table_inst.save()
 
         # The 'OrderItem' part
         for cart_inst in cart_session:
