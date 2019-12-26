@@ -1,5 +1,9 @@
+from decimal import Decimal
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+
 from shop.models import Product
+from coupons.models import Coupon
 
 
 class Order(models.Model):
@@ -10,6 +14,18 @@ class Order(models.Model):
     postal_code = models.CharField(max_length=25)
     city = models.CharField(max_length=100)
     paid = models.BooleanField(default=False)
+    discount = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+
+    # Optional
+    coupon = models.ForeignKey(
+        to=Coupon,
+        related_name="orders",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
