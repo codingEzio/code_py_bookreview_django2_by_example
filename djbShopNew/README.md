@@ -23,7 +23,56 @@
     4. [st Handling static files that dont pertain to an app in Django](https://stackoverflow.com/questions/22976596/handling-static-files-that-dont-pertain-to-an-app-in-django)
     5. [st serving static files on Django production tutorial](https://stackoverflow.com/a/29087858/6273859)
     6. [Django Static Files](https://rahmonov.me/posts/django-static-files/) <small>(*read*, *extremely helpful*)</small>
+- About settings related to *i18n* and *i10n* <small>(*underscore* or *dash* MATTERS)</small>
+  - *`LANGUAGES`*
+    ```bash
+    # Follow https://github.com/django/django/blob/master/django/conf/global_settings.py
+    # Examples:
+    #   ('de'     , 'German'             )    origin (no variations in settings)
+    #   ('es'     , 'Spanish'            )    origin (with variations, not much, mostly in Spanish & English)
+    #   ('es-ar'  , 'Argentinian Spanish')    variations
+    #   ('zh-hant', 'Traditional Chinese')    variations, but not the same as western languages
+    LANGUAGES = (
+      ("en-gb", "English"),
+      ("de", "German"),
+      ("zh-hant", "Traditional Chinese"),
+    )
+    ```
+  - *`LANGUAGE_CODE`*
+    ```bash
+    # Follow http://www.i18nguy.com/unicode/language-identifiers.html
+    #   1. Way more variations than other settings
+    #   2. Use lowercase version instead (zh-hant instead of zh-Hant)
+    #   3. Choose the "country-related" one from the list (zh-TW, not zh-Hant)
+    # Examples:
+    #   de-DE
+    #   en-GB  , en-US        
+    #   zh-Hant, zh-TW        use the latter to achieve greater clarity
+    LANGUAGE_CODE = "en-gb"
+    ```
+  - *`LOCALE_PATHS`* <small>(search `locale_alias` in the link)</small>
+    ```bash
+    # Follow https://github.com/python/cpython/blob/3.6/Lib/locale.py 
+    #   1. This setting itself is nothing special
+    #   2. The things you need to care about is the sub-directories 🤓
+    # Examples:
+    #   zh          China with encoding 'eucCN'                 # don't (too vague) 
+    #   zh_cn       China with encoding 'gb2312'                # yes     
+    #   zh_cn.euc   China with encoding 'eucCN' (with locale)   # don't (let user care about the encoding)
 
+    # In practice
+    #   underscore, lowercase, with-locale
+    locale/
+      zh_tw/
+      de_de/
+      en_gb/
+    ```
+  - Three of them **combined**
+    ```bash
+    # Examples
+    #   ("de", "German")                      de-de     de_de/
+    #   ("zh-hant", "Traditional Chinese")    zh-tw     zh_tw/
+    ```
 
 ### Getting Started
 - Install packages
