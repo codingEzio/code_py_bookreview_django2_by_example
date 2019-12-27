@@ -1,4 +1,5 @@
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,9 +94,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # See https://github.com/django/django/blob/master/django/conf/global_settings.py
 LANGUAGES = (
-    ("en-gb", "English"),
-    ("de", "German"),
-    ("zh-hant", "Traditional Chinese"),
+    ("en-gb", _("English")),
+    ("de", _("German")),
+    ("zh-hant", _("Traditional Chinese")),
 )
 
 # See http://www.i18nguy.com/unicode/language-identifiers.html
