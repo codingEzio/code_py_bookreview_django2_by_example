@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -90,7 +91,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# See https://github.com/django/django/blob/master/django/conf/global_settings.py
+LANGUAGES = (
+    ("en-gb", "English"),
+    ("de", "German"),
+    ("zh-hant", "Traditional Chinese"),
+)
+
+# See http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = "en-gb"
+
+# See https://github.com/python/cpython/blob/3.6/Lib/locale.py
+# Also
+#   When you use the `makemessages` command, the files would be generated in
+#   the 'locale/LANG/' we created. For applications with a 'locale/' folder,
+#   message files would be generated in THAT directory.
+LOCALE_PATHS = os.path.join(BASE_DIR, "locale/")
 
 USE_I18N = True
 USE_L10N = True
