@@ -73,6 +73,32 @@
     #   ("de", "German")                      de-de     de_de/
     #   ("zh-hant", "Traditional Chinese")    zh-tw     zh_tw/
     ```
+- Three stages of *i18n*
+  1. *Mark* the stuff you wanna internatonalize <small>(e.g. `_()`, `{% trans %}`)</small>
+  2. *Write* the translation <small>(`.po`)</small>
+  3. *Compile* the translation files <small>(`.mo`)</small>
+- Where to get *translations* <small>(only for *personal* project)</small>
+  - What I think is better
+    - Websites that offers different languages
+    - The references on the [*Linguee*](https://www.linguee.com) website
+  - Online translation <small>(best to not-that-good)</small>
+    - [Reverso](https://context.reverso.net/translation/)
+    - [Linguee](https://www.linguee.com)
+    - [Google Translate](https://translate.google.com)
+  - Choosing the right word
+    - [HiNative](https://hinative.com/)
+- Issues you might encounter when using `{% blocktrans %}`
+  ```html
+  <!-- Do this -->
+  {% blocktrans with K=V K=V %} ...
+  {% endblocktrans %}
+
+  <!-- Not this -->
+  <!-- sometimes the expressions might be really long, well, get with it -->
+  {% blocktrans with K=V
+                     K=V %} ...
+  {% endblocktrans %}
+  ```
 
 ### Getting Started
 - Install packages
