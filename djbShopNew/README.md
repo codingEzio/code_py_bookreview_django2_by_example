@@ -23,6 +23,11 @@
     4. [st Handling static files that dont pertain to an app in Django](https://stackoverflow.com/questions/22976596/handling-static-files-that-dont-pertain-to-an-app-in-django)
     5. [st serving static files on Django production tutorial](https://stackoverflow.com/a/29087858/6273859)
     6. [Django Static Files](https://rahmonov.me/posts/django-static-files/) <small>(*read*, *extremely helpful*)</small>
+- What is *django-rosetta*
+  - A tool that saves you from repetitive commands like `makemessages --all` & `compilemessages`
+  - Other small things you might wanna know
+    1. *Fuzzy* in the django-rosetta page means <q>this translation needs to be *reviewed*</q>
+    2. You need to re-start the server if you're using command `compilemessages` :)
 - About settings related to *i18n* and *i10n* <small>(*underscore* or *dash* MATTERS)</small>
   - *`LANGUAGES`*
     ```bash
