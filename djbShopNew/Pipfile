@@ -28,6 +28,7 @@ Pillow = "==6.2.1"
 WeasyPrint = "==0.42.3"
 # i18n
 django-rosetta = "==0.9.3"
+django-parler = "==2.0"
 
 [requires]
 python_version = "3.7"
