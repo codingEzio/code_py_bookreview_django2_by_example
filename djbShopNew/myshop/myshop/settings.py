@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # dev
     "django_extensions",
     "debug_toolbar",
+    "rosetta",
 ]
 
 MIDDLEWARE = [

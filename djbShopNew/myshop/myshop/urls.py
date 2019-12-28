@@ -14,6 +14,7 @@ urlpatterns = [
         route="coupons/",
         view=include(arg="coupons.urls", namespace="coupons"),
     ),
+    path(route='rosetta/', view=include(arg='rosetta.urls')),
     path(route="", view=include("shop.urls", namespace="shop")),
 ]
 
