@@ -98,9 +98,6 @@
   {% blocktrans with K=V
                      K=V %} ...
   {% endblocktrans %}
-
-  <!-- Also, don't forget to import the tag -->
-  {% load i18n %}
   ```
 
 ### Getting Started
