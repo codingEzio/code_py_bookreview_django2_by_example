@@ -107,7 +107,7 @@ LANGUAGE_CODE = "en-gb"
 #   When you use the `makemessages` command, the files would be generated in
 #   the 'locale/LANG/' we created. For applications with a 'locale/' folder,
 #   message files would be generated in THAT directory.
-LOCALE_PATHS = os.path.join(BASE_DIR, "locale/")
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale/"),)
 
 USE_I18N = True
 USE_L10N = True
