@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "debug_toolbar",
     "rosetta",
+    "parler",
 ]
 
 MIDDLEWARE = [
@@ -196,3 +197,19 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 # Execute tasks locally in a synchronous way instead of sending them
 # into a queue. Add this if you wanna disable Celery temporarily.
 # CELERY_ALWAYS_EAGER = True
+
+
+# Third-party libraries :: i18n
+
+# fmt: off
+PARLER_LANGUAGES = {
+    None: (
+        {"code": "en-gb"},
+        {"code": "de"},
+        {"code": "zh-hant"},
+    ),
+    "default": {
+        "fallbacks": ["en-gb"],
+        "hide_translated": False,
+    },
+}
