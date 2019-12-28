@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-28 09:33+0800\n"
+"POT-Creation-Date: 2019-12-28 10:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cart/forms.py:20
+#: cart/forms.py:20 templates/cart/detail.html:15
 msgid "Quantity"
 msgstr "Quantity"
 
@@ -37,3 +37,113 @@ msgstr "German"
 #: myshop/settings.py:99
 msgid "Traditional Chinese"
 msgstr "Traditional Chinese"
+
+#: templates/cart/detail.html:5 templates/cart/detail.html:9
+msgid "Your shopping cart"
+msgstr "Your shopping cart"
+
+#: templates/cart/detail.html:13
+msgid "Image"
+msgstr "Image"
+
+#: templates/cart/detail.html:14
+msgid "Product"
+msgstr "Product"
+
+#: templates/cart/detail.html:16 templates/cart/detail.html:46
+msgid "Remove"
+msgstr "Remove"
+
+#: templates/cart/detail.html:17
+msgid "Unit"
+msgstr "Unit"
+
+#: templates/cart/detail.html:18
+msgid "Price"
+msgstr "Price"
+
+#: templates/cart/detail.html:58
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: templates/cart/detail.html:79 templates/orders/order/create.html:32
+msgid "Total"
+msgstr "Total"
+
+#: templates/cart/detail.html:86
+msgid "Apply a coupon"
+msgstr "Apply a coupon"
+
+#: templates/cart/detail.html:89
+msgid "Apply"
+msgstr "Apply"
+
+#: templates/cart/detail.html:94
+msgid "Continue shopping"
+msgstr "Continue shopping"
+
+#: templates/cart/detail.html:97 templates/orders/order/create.html:5
+#: templates/orders/order/create.html:9
+msgid "Checkout"
+msgstr "Checkout"
+
+#: templates/orders/order/create.html:12
+msgid "Your order"
+msgstr "Your order"
+
+#: templates/orders/order/create.html:38
+msgid "Place order"
+msgstr "Place order"
+
+#: templates/orders/order/created.html:4
+msgid "Thank you."
+msgstr "Thank you."
+
+#: templates/orders/order/created.html:8
+msgid "Thank you"
+msgstr "Thank you"
+
+#: templates/orders/order/created.html:9
+#, python-format
+msgid ""
+"\n"
+"        <p>\n"
+"            Your order has been successfully completed.\n"
+"            Your order number is <strong>%(order_id)s</strong>.\n"
+"        </p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>\n"
+"            Your order has been successfully completed.\n"
+"            Your order number is <strong>%(order_id)s</strong>.\n"
+"        </p>\n"
+"    "
+
+#: templates/shop/base.html:22
+msgid "My shop"
+msgstr "My shop"
+
+#: templates/shop/base.html:29
+msgid "Your cart"
+msgstr "Your cart"
+
+#: templates/shop/base.html:38
+msgid "Your cart is empty."
+msgstr "Your cart is empty."
+
+#: templates/shop/product/detail.html:25
+msgid "Add to cart"
+msgstr "Add to cart"
+
+#: templates/shop/product/list.html:6 templates/shop/product/list.html:30
+msgid "Products"
+msgstr "Products"
+
+#: templates/shop/product/list.html:12
+msgid "Categories"
+msgstr "Categories"
+
+#: templates/shop/product/list.html:15
+msgid "All"
+msgstr "All"

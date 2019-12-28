@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
             content="width=device-width, initial-scale=1.1"
         />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>{% block title %}My shop{% endblock title %}</title>
+        <title>{% block title %}{% trans "My shop" %}{% endblock title %}</title>
         <link
             rel="shortcut icon"
             type="image/png"
@@ -18,20 +19,22 @@
     </head>
     <body>
         <div id="header">
-            <a href="/" class="logo">My shop</a>
+            <a href="/" class="logo">{% trans "My shop" %}</a>
         </div>
 
         <div id="subheader">
             <div class="cart">
                 {% with cart_global|length as total_items %}
                     {% if cart_global|length > 0 %}
-                        Your cart
+                        {% trans "Your cart" %}
                         <a href="{% url 'cart:cart_detail' %}">
-                            {{ total_items }} item{{ total_items|pluralize }},
-                            ${{ cart_global.get_total_price_after_discount }}
+                            {% blocktrans with total_items_plural=total_items|pluralize total_price_after_discount=cart_global.get_total_price_after_discount %}
+                                {{ total_items }} item{{ total_items_plural }},
+                                ${{ total_price_after_discount }}
+                            {% endblocktrans %}
                         </a>
                     {% else %}
-                        Your cart is empty.
+                        {% trans "Your cart is empty." %}
                     {% endif %}
                 {% endwith %}
             </div>

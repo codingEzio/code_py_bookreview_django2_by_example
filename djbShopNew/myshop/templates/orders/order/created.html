@@ -1,13 +1,16 @@
 {% extends 'shop/base.html' %}
+{% load i18n %}
 
 {% block title %}
-    Thank you.
+    {% trans "Thank you." %}
 {% endblock title %}
 
 {% block content %}
-    <h1>Thank you</h1>
-    <p>
-        Your order has been successfully completed.
-        Your order number is <strong>{{ order_table_inst.id }}</strong>.
-    </p>
+    <h1>{% trans "Thank you" %}</h1>
+    {% blocktrans with order_id=order_table_inst.id %}
+        <p>
+            Your order has been successfully completed.
+            Your order number is <strong>{{ order_id }}</strong>.
+        </p>
+    {% endblocktrans %}
 {% endblock content %}

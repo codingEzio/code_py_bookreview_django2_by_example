@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-28 09:33+0800\n"
+"POT-Creation-Date: 2019-12-28 10:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cart/forms.py:20
+#: cart/forms.py:20 templates/cart/detail.html:15
 msgid "Quantity"
 msgstr "數量"
 
@@ -36,3 +36,113 @@ msgstr "德語"
 #: myshop/settings.py:99
 msgid "Traditional Chinese"
 msgstr "繁體中文"
+
+#: templates/cart/detail.html:5 templates/cart/detail.html:9
+msgid "Your shopping cart"
+msgstr "您的購物車"
+
+#: templates/cart/detail.html:13
+msgid "Image"
+msgstr "圖片"
+
+#: templates/cart/detail.html:14
+msgid "Product"
+msgstr "商品"
+
+#: templates/cart/detail.html:16 templates/cart/detail.html:46
+msgid "Remove"
+msgstr "移除"
+
+#: templates/cart/detail.html:17
+msgid "Unit"
+msgstr "單位"
+
+#: templates/cart/detail.html:18
+msgid "Price"
+msgstr "價格"
+
+#: templates/cart/detail.html:58
+msgid "Subtotal"
+msgstr "小計"
+
+#: templates/cart/detail.html:79 templates/orders/order/create.html:32
+msgid "Total"
+msgstr "總價"
+
+#: templates/cart/detail.html:86
+msgid "Apply a coupon"
+msgstr "使用優惠券"
+
+#: templates/cart/detail.html:89
+msgid "Apply"
+msgstr "使用"
+
+#: templates/cart/detail.html:94
+msgid "Continue shopping"
+msgstr "繼續購物"
+
+#: templates/cart/detail.html:97 templates/orders/order/create.html:5
+#: templates/orders/order/create.html:9
+msgid "Checkout"
+msgstr "結賬"
+
+#: templates/orders/order/create.html:12
+msgid "Your order"
+msgstr "您的訂單"
+
+#: templates/orders/order/create.html:38
+msgid "Place order"
+msgstr "下單"
+
+#: templates/orders/order/created.html:4
+msgid "Thank you."
+msgstr "萬分感謝。"
+
+#: templates/orders/order/created.html:8
+msgid "Thank you"
+msgstr "萬分感謝"
+
+#: templates/orders/order/created.html:9
+#, python-format
+msgid ""
+"\n"
+"        <p>\n"
+"            Your order has been successfully completed.\n"
+"            Your order number is <strong>%(order_id)s</strong>.\n"
+"        </p>\n"
+"    "
+msgstr ""
+"\n"
+"        <p>\n"
+"            您已成功下單。\n"
+"            您的訂單號為： <strong>%(order_id)s</strong>。\n"
+"        </p>\n"
+"    "
+
+#: templates/shop/base.html:22
+msgid "My shop"
+msgstr "我的小店"
+
+#: templates/shop/base.html:29
+msgid "Your cart"
+msgstr "您的購物車"
+
+#: templates/shop/base.html:38
+msgid "Your cart is empty."
+msgstr "您的購物車空空如也。"
+
+#: templates/shop/product/detail.html:25
+msgid "Add to cart"
+msgstr "加入購物車"
+
+#: templates/shop/product/list.html:6 templates/shop/product/list.html:30
+msgid "Products"
+msgstr "商品"
+
+#: templates/shop/product/list.html:12
+msgid "Categories"
+msgstr "類別"
+
+#: templates/shop/product/list.html:15
+msgid "All"
+msgstr "所有"
