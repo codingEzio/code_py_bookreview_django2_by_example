@@ -39,39 +39,76 @@
     )
     ```
   - *`LANGUAGE_CODE`*
-    ```bash
-    # Follow http://www.i18nguy.com/unicode/language-identifiers.html
-    #   1. Way more variations than other settings
-    #   2. Use lowercase version instead (zh-hant instead of zh-Hant)
-    #   3. Choose the "country-related" one from the list (zh-TW, not zh-Hant)
-    # Examples:
-    #   de-DE
-    #   en-GB  , en-US        
-    #   zh-Hant, zh-TW        use the latter to achieve greater clarity
-    LANGUAGE_CODE = "en-gb"
-    ```
-  - *`LOCALE_PATHS`* <small>(search `locale_alias` in the link)</small>
-    ```bash
-    # Follow https://github.com/python/cpython/blob/3.6/Lib/locale.py 
-    #   1. This setting itself is nothing special
-    #   2. The things you need to care about is the sub-directories 🤓
-    # Examples:
-    #   zh          China with encoding 'eucCN'                 # don't (too vague) 
-    #   zh_cn       China with encoding 'gb2312'                # yes     
-    #   zh_cn.euc   China with encoding 'eucCN' (with locale)   # don't (let user care about the encoding)
+    - What I assume <small>(do read to the next part!)</small>
+      ```bash
+      # Follow http://www.i18nguy.com/unicode/language-identifiers.html
+      #   1. Way more variations than other settings
+      #   2. Use lowercase version instead (zh-hant instead of zh-Hant)
+      #   3. Choose the "country-related" one from the list (zh-TW, not zh-Hant)
 
-    # In practice
-    #   underscore, lowercase, with-locale
-    locale/
-      zh_tw/
-      de_de/
-      en_gb/
-    ```
+      # Examples:
+      #   de-DE
+      #   en-GB  , en-US        
+      #   zh-Hant, zh-TW      # single source of true > clarity (eh, actually it's not)
+      LANGUAGE_CODE = "en-gb"
+      ```
+    - *Acutally*
+      ```bash
+      # Follow https://github.com/django/django/blob/master/django/conf/global_settings.py
+
+      # Simply put, 'LANGUAGE_CODE' MUST conform to the settings in the 'LANGUAGES' (settings.py)
+      # Why? Because I tested it out.
+
+      # de      yes, https://github.com/django/django/blob/master/django/conf/global_settings.py#L66
+      # de-de   no , https://github.com/django/django/blob/master/django/conf/global_settings.py#L66 doesn't have this
+      ```
+  - *`LOCALE_PATHS`*
+    - What I assume <small>(do read to the next part!)</small>
+      ```bash
+      # Follow https://github.com/python/cpython/blob/3.6/Lib/locale.py 
+      #   1. This setting itself is nothing special
+      #   2. The things you need to care about is the sub-directories 🤓
+      # Examples:
+      #   zh          China with encoding 'eucCN'                 # don't   (too vague) 
+      #   zh_cn       China with encoding 'gb2312'                # yes     
+      #   zh_cn.euc   China with encoding 'eucCN' (with locale)   # don't   (let user care about the encoding)
+
+      # In practice
+      #   these aren't necessarily wrong, but may have issues with third-party library
+      #   you just need to met these conditions
+      #   - HAVE https://github.com/django/django/blob/master/django/conf/global_settings.py
+      #   - HAVE the names in 'LANGUAGES'
+      #   - THEN you could use it (replace the  '-' with '_')
+      locale/
+        zh_tw/
+        de_de/
+        en_gb/
+      ```
+    - The settings above works ***until a third-party library was used***, e.g. [`django-rosetta`](https://pypi.org/project/django-rosetta/)
+      ```bash
+      # Actually it's quite simple since I've made a little research on the source code of 'django-rosetta'.
+      # All sub-directories MUST follow the names in the `LANGUAGES` (settings.py)
+
+      # Follow https://github.com/django/django/blob/master/django/conf/global_settings.py
+      locale/
+        zh_hant/
+        de/
+        en_gb/
+      ```
+
+    - More on *django-rosetta* and *locale names* <small>(all these links directly point to **what I'm trying to say**)</small>
+      1. *django-rosetta* source code
+        - [find the template that displaying the languages](https://github.com/mbi/django-rosetta/blob/develop/rosetta/templates/rosetta/file-list.html#L23)
+        - [find the view that returns the `context` variable](https://github.com/mbi/django-rosetta/blob/develop/rosetta/views.py#L221)
+      2. *django-rosetta* documentation
+        - [detect languages by what](https://django-rosetta.readthedocs.io/settings.html?highlight=rosetta_languages)
+      3. other people's code
+        - [a random config of Python Web framework *Saleor*](https://github.com/IsaacMorzy/threads/blob/70d56c1e4a853aab9b91933a1a1a06370763d5cc/.tx/config)
   - Three of them **combined**
     ```bash
     # Examples
-    #   ("de", "German")                      de-de     de_de/
-    #   ("zh-hant", "Traditional Chinese")    zh-tw     zh_tw/
+    #   ("de", "German")                      de          de/
+    #   ("zh-hant", "Traditional Chinese")    zh-hant     zh_hant/
     ```
 - Three stages of *i18n*
   1. *Mark* the stuff you wanna internatonalize <small>(e.g. `_()`, `{% trans %}`)</small>
