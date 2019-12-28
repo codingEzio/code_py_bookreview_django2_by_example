@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-28 10:47+0800\n"
+"POT-Creation-Date: 2019-12-28 16:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cart/forms.py:20 templates/cart/detail.html:15
+#: cart/forms.py:20 templates/cart/detail.html:16
 msgid "Quantity"
 msgstr "Quantität"
 
@@ -25,63 +25,90 @@ msgstr "Quantität"
 msgid "CouponCode"
 msgstr "Voucher"
 
-#: myshop/settings.py:97
+#: myshop/settings.py:98
 msgid "English"
 msgstr "Englisch"
 
-#: myshop/settings.py:98
+#: myshop/settings.py:99
 msgid "German"
 msgstr "Deutsche"
 
-#: myshop/settings.py:99
+#: myshop/settings.py:100
 msgid "Traditional Chinese"
 msgstr "Traditionelles Chinesisch"
 
-#: templates/cart/detail.html:5 templates/cart/detail.html:9
+#: myshop/urls.py:18
+msgid "admin/"
+msgstr ""
+
+#: myshop/urls.py:19
+msgid "cart/"
+msgstr ""
+
+#: myshop/urls.py:21
+msgid "orders/"
+msgstr ""
+
+#: myshop/urls.py:24
+msgid "coupons/"
+msgstr ""
+
+#: templates/cart/detail.html:6 templates/cart/detail.html:10
 msgid "Your shopping cart"
 msgstr "Dein Einkaufswagen"
 
-#: templates/cart/detail.html:13
+#: templates/cart/detail.html:14
 msgid "Image"
 msgstr "Bild"
 
-#: templates/cart/detail.html:14
+#: templates/cart/detail.html:15
 msgid "Product"
 msgstr "Produkt"
 
-#: templates/cart/detail.html:16 templates/cart/detail.html:46
+#: templates/cart/detail.html:17 templates/cart/detail.html:47
 msgid "Remove"
 msgstr "Entfernen"
 
-#: templates/cart/detail.html:17
+#: templates/cart/detail.html:18
 msgid "Unit"
 msgstr "Entfernen"
 
-#: templates/cart/detail.html:18
+#: templates/cart/detail.html:19
 msgid "Price"
 msgstr "Preis"
 
-#: templates/cart/detail.html:58
+#: templates/cart/detail.html:59
 msgid "Subtotal"
 msgstr "Zwischensumme"
 
-#: templates/cart/detail.html:79 templates/orders/order/create.html:32
+#: templates/cart/detail.html:64
+#, python-format
+msgid ""
+"\n"
+"                <td>\"%(coupon_code)s\" coupon (%(discount)s%% off)</td>\n"
+"            "
+msgstr ""
+"\n"
+"                <td>\"%(coupon_code)s\" Gutschein (%(discount)s%% reduziert)</td>\n"
+"            "
+
+#: templates/cart/detail.html:75 templates/orders/order/create.html:31
 msgid "Total"
 msgstr "Total"
 
-#: templates/cart/detail.html:86
+#: templates/cart/detail.html:82
 msgid "Apply a coupon"
 msgstr "Gutschein anwenden"
 
-#: templates/cart/detail.html:89
+#: templates/cart/detail.html:85
 msgid "Apply"
 msgstr "Anwenden"
 
-#: templates/cart/detail.html:94
+#: templates/cart/detail.html:90
 msgid "Continue shopping"
 msgstr "Einkaufen fortfahren"
 
-#: templates/cart/detail.html:97 templates/orders/order/create.html:5
+#: templates/cart/detail.html:93 templates/orders/order/create.html:5
 #: templates/orders/order/create.html:9
 msgid "Checkout"
 msgstr "Auschecken"
@@ -90,19 +117,30 @@ msgstr "Auschecken"
 msgid "Your order"
 msgstr "Ihr Auftrag"
 
-#: templates/orders/order/create.html:38
+#: templates/orders/order/create.html:23
+#, python-format
+msgid ""
+"\n"
+"                        \"%(coupon_code)s\" (%(discount)s%% off)\n"
+"                    "
+msgstr """
+"\n"
+"                        \"%(coupon_code)s\" (%(discount)s%% reduziert)\n"
+"                    "
+
+#: templates/orders/order/create.html:37
 msgid "Place order"
 msgstr "Bestellung abschicken"
 
-#: templates/orders/order/created.html:4
+#: templates/orders/order/created.html:5
 msgid "Thank you."
 msgstr "Danke."
 
-#: templates/orders/order/created.html:8
+#: templates/orders/order/created.html:9
 msgid "Thank you"
 msgstr "Danke"
 
-#: templates/orders/order/created.html:9
+#: templates/orders/order/created.html:10
 #, python-format
 msgid ""
 "\n"
@@ -119,7 +157,7 @@ msgstr ""
 "        </p>\n"
 "    "
 
-#: templates/shop/base.html:22
+#: templates/shop/base.html:12 templates/shop/base.html:22
 msgid "My shop"
 msgstr "Mein Laden"
 
@@ -127,7 +165,20 @@ msgstr "Mein Laden"
 msgid "Your cart"
 msgstr "Ihr Warenkorb"
 
-#: templates/shop/base.html:38
+#: templates/shop/base.html:31
+#, python-format
+msgid ""
+"\n"
+"                                %(total_items)s item%(total_items_plural)s,\n"
+"                                $%(total_price_after_discount)s\n"
+"                            "
+msgstr ""
+"\n"
+"                                %(total_items)s Artikel%(total_items_plural)s,\n"
+"                                $%(total_price_after_discount)s\n"
+"                            "
+
+#: templates/shop/base.html:37
 msgid "Your cart is empty."
 msgstr "Ihr Warenkorb ist leer."
 
@@ -135,14 +186,14 @@ msgstr "Ihr Warenkorb ist leer."
 msgid "Add to cart"
 msgstr "In den Warenkorb"
 
-#: templates/shop/product/list.html:6 templates/shop/product/list.html:30
+#: templates/shop/product/list.html:7 templates/shop/product/list.html:31
 msgid "Products"
 msgstr "Produkte"
 
-#: templates/shop/product/list.html:12
+#: templates/shop/product/list.html:13
 msgid "Categories"
 msgstr "Kategorien"
 
-#: templates/shop/product/list.html:15
+#: templates/shop/product/list.html:16
 msgid "All"
 msgstr "Alles"
