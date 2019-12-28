@@ -24,7 +24,8 @@
     5. [st serving static files on Django production tutorial](https://stackoverflow.com/a/29087858/6273859)
     6. [Django Static Files](https://rahmonov.me/posts/django-static-files/) <small>(*read*, *extremely helpful*)</small>
 - What is *django-rosetta*
-  - A tool that saves you from repetitive commands like `makemessages --all` & `compilemessages`
+  - A tool that saves you from repetitive commands `compilemessages`
+    > Do note that you still need to run `makemessages --all` to gen the translation files <small>(i.e. `.po`)</small>! 
   - Other small things you might wanna know
     1. *Fuzzy* in the django-rosetta page means <q>this translation needs to be *reviewed*</q>
     2. You need to re-start the server if you're using command `compilemessages` :)
