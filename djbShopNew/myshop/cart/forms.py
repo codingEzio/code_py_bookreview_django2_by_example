@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 10)]
 
@@ -14,8 +15,9 @@ class CartAddProductForm(forms.Form):
     4> display(tmpl)  redirected page (surely related to processing result)
     """
 
+    # Just sayin', the `label` is the form version of 'verbose_name'.
     quantity = forms.TypedChoiceField(
-        choices=PRODUCT_QUANTITY_CHOICES, coerce=int
+        choices=PRODUCT_QUANTITY_CHOICES, coerce=int, label=_("Quantity")
     )
     update = forms.BooleanField(
         required=False, initial=False, widget=forms.HiddenInput
