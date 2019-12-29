@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5b55782b12bf3abeb7ccaff45e07a32747b70a31ce8e37336d08dd2e18a590af"
+            "sha256": "b33d528822b10714f4f09f0f564056c0dac19a46889409c266536ddbddaf5c5e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,7 +28,7 @@
                 "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0",
                 "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"
             ],
-            "markers": "sys_platform == 'darwin'",
+            "markers": "platform_system == 'Darwin'",
             "version": "==0.1.0"
         },
         "asgiref": {
@@ -191,6 +191,14 @@
             ],
             "index": "pypi",
             "version": "==2.2.5"
+        },
+        "django-localflavor": {
+            "hashes": [
+                "sha256:628f382ac0b8ce401d4ba684031abd2548c24782df9fb0d5c7ad44c35a2bb095",
+                "sha256:7a4fa03651e609c30f720e35fb9442cddefa1975646cf9d6765a2ba1ed139961"
+            ],
+            "index": "pypi",
+            "version": "==2.2"
         },
         "django-parler": {
             "hashes": [
@@ -583,6 +591,13 @@
             ],
             "index": "pypi",
             "version": "==0.10.3"
+        },
+        "python-stdnum": {
+            "hashes": [
+                "sha256:4c1347c414d7bdffb454924998f62c04d907a5c01faff0e35df659b0b52acba5",
+                "sha256:bb58877dafc2e590dbfddc63fa04876ab2005c3f35c8356a2dd01f62a9bdc4d6"
+            ],
+            "version": "==1.12"
         },
         "pytz": {
             "hashes": [
