@@ -11,6 +11,8 @@ flake8 = "==3.7.8"
 # core
 django = "==3.0.0"
 python-dotenv = "==0.10.3"
+# Django3.0 related (django.utils.six was removed)
+six = "==1.13.0"
 # dev enhancement
 jupyter = "==1.0.0"
 ipython = "==7.10.2"
