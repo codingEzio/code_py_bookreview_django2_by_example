@@ -5,11 +5,18 @@ from cart.forms import CartAddProductForm
 
 
 def product_list(request, category_slug=None):
+    current_language = request.LANGUAGE_CODE
+
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
+
     if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
+        category = get_object_or_404(
+            Category,
+            translations__language_code=current_language,
+            translations__slug=category_slug,
+        )
         products = products.filter(category=category)
 
     return render(
@@ -24,7 +31,15 @@ def product_list(request, category_slug=None):
 
 
 def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    current_language = request.LANGUAGE_CODE
+
+    product = get_object_or_404(
+        Product,
+        id=id,
+        translations__language_code=current_language,
+        translations__slug=slug,
+        available=True,
+    )
     cart_product_form = CartAddProductForm()
 
     return render(
