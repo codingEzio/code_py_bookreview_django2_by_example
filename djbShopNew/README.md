@@ -130,7 +130,32 @@
     - [Google Translate](https://translate.google.com)
   - Choosing the right word
     - [HiNative](https://hinative.com/)
-- Issues you might encounter when using `{% blocktrans %}`
+
+
+### Issues
+- About *Django 3.0 compatibility*
+  - [*django-parler*](https://pypi.org/project/django-parler/) still only supports `Django <= 3.0.0 `
+  - Of course, the *easiest* way is to continue using `Django 2.*.*`, *but*, if you still want to use `3.0`
+    ```bash
+    # Get the packages which django-parler relies on (choose one)
+    pip3   install six = "==1.13.0"
+    pipenv install six = "==1.13.0"
+
+    # Go to the origin
+    cd .../YOUR_PYTHON/lib/python3.?/site-packages/parler/  # check by `which python`
+    ```
+    ```python
+    # grep -inr 'from django\.utils import six' .
+    from django.utils import six  # OLD
+    import six                    # NEW
+
+    # grep -inr 'python_2_unicode_compatible' . | grep -v '@\|pyc'
+    from django.utils.encoding import force_text, python_2_unicode_compatible  # OLD
+    from django.utils.encoding import force_text                               # NEW
+    from six import python_2_unicode_compatible                                # NEW
+    ```
+
+- Template tag `{% blocktrans %}`
   ```html
   <!-- Do this -->
   {% blocktrans with K=V K=V %} ...
@@ -142,3 +167,4 @@
                      K=V %} ...
   {% endblocktrans %}
   ```
+- pass
