@@ -1,4 +1,4 @@
-### Tips
+# New Document### Tips
 - Wanna try something without actually *running* it?
   ```./manage.py THE_COMMAND --dry-run```
 - About *static files*, or `./manage.py collectstatic`
@@ -130,6 +130,12 @@
     - [Google Translate](https://translate.google.com)
   - Choosing the right word
     - [HiNative](https://hinative.com/)
+- About *i10n* <small>(localization)</small>
+  - [*Offical doc*](https://docs.djangoproject.com/en/3.0/topics/i18n/formatting/)
+  - [*Third-party library* `django-localflavor`](https://pypi.org/project/django-localflavor/)
+    > Library *django-localflavor* is a collection of assorted pieces of code that are useful for particular countries or cultures. These are called the “local flavor” add-ons and live in the localflavor package.<br><br>
+    > Most of the localflavor add-ons are localized form components deriving from the forms framework.
+  - The [*formatting configuration*](https://github.com/django/django/blob/stable/2.0.x/django/conf/locale/de/formats.py) <small>(django source code)</small> for each languages
 
 
 ### Issues
