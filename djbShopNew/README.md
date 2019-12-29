@@ -172,4 +172,18 @@
                      K=V %} ...
   {% endblocktrans %}
   ```
-- pass
+
+- Errors while migrating fields: `type object 'Product' has no attribute '_parler_meta'`
+  - Context
+    - Using [*django-parler*](https://pypi.org/project/django-parler/)
+    - Using stuff like `TranslatableModel`, `TranslatedFields` and `TranslatableAdmin` <small>(of *django-parler*)</small>
+  - How to resolve
+    - Links
+      - [Issues - Translated models can't be used in datamigration](https://github.com/django-parler/django-parler/issues/157)
+      - Still the same issue page, but directly points to the <small>(temporary)</small> [*solution*](https://github.com/django-parler/django-parler/issues/157#issuecomment-534440366)
+    - Solution
+      ```python
+      # Edit the migration file (how many trans models -> how many edits)
+      bases=(parler.models.TranslatedFieldsModelMixin, models.Model),  # OLD
+      bases=(parler.models.TranslatableModel, models.Model),           # NEW
+      ```
