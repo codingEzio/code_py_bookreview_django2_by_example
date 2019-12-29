@@ -138,13 +138,18 @@
   - Of course, the *easiest* way is to continue using `Django 2.*.*`, *but*, if you still want to use `3.0`
     ```bash
     # Get the packages which django-parler relies on (choose one)
-    pip3   install six = "==1.13.0"
+    # Since Django 3.* already dropped the old `six` module :(
+    pip3   install six = "==1.13.0"    # https://pypi.org/project/six/
     pipenv install six = "==1.13.0"
 
     # Go to the origin
     cd .../YOUR_PYTHON/lib/python3.?/site-packages/parler/  # check by `which python`
     ```
     ```python
+    # References
+    # ~ https://stackoverflow.com/a/59420098    about `six`
+    # ~ https://stackoverflow.com/a/49264381    about `python_2_unicode_compatible`
+
     # grep -inr 'from django\.utils import six' .
     from django.utils import six  # OLD
     import six                    # NEW
