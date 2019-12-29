@@ -11,7 +11,8 @@ class Category(TranslatableModel):
     )
 
     class Meta:
-        ordering = ("name",)
+        # Commented out cuz the fields are in a separate table (XxTranslation)
+        # ordering = ("name",)
         verbose_name = "category"
         verbose_name_plural = "categories"
 
@@ -46,8 +47,9 @@ class Product(TranslatableModel):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ("name",)
-        index_together = (("id", "slug"),)
+        # Commented out cuz the fields are in a separate table (XxTranslation)
+        # ordering = ("name",)
+        # index_together = (("id", "slug"),)
         pass
 
     def __str__(self):

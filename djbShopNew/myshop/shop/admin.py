@@ -1,23 +1,24 @@
 from django.contrib import admin
+from parler.admin import TranslatableAdmin
+
 from .models import Product, Category
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslatableAdmin):
     list_display = ["name", "slug"]
-    prepopulated_fields = {"slug": ("name",)}
+
+    # Same functionality as attr 'prepopulated_fields'
+    # The reason is django-parler only supports the way of using method
+    def get_prepopulated_fields(self, request, obj=None):
+        return {"slug": ("name",)}
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = [
-        "name",
-        "slug",
-        "price",
-        "available",
-        "created",
-        "updated",
-    ]
+class ProductAdmin(TranslatableAdmin):
+    list_display = ["name", "slug", "price", "available", "created", "updated"]
     list_filter = ["available", "created", "updated"]
     list_editable = ["price", "available"]
-    prepopulated_fields = {"slug": ("name",)}
+
+    def get_prepopulated_fields(self, request, obj=None):
+        return {"slug": ("name",)}
