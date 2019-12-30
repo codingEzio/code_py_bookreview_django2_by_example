@@ -20,7 +20,7 @@ django-extensions = "==2.2.5"
 django-debug-toolbar = "==2.1"
 # task-queue (requires a message broker, RMQ or Redis)
 celery = "==4.4.0"
-redis = "==3.3.11"
+redis = "==3.3.11"  # also used for building 'recommendation engine'
 # monitor tool
 flower = "==0.9.3"
 # db related

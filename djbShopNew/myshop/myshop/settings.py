@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "rosetta",
     "parler",
-    'localflavor',
+    "localflavor",
 ]
 
 MIDDLEWARE = [
@@ -198,6 +198,13 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 # Execute tasks locally in a synchronous way instead of sending them
 # into a queue. Add this if you wanna disable Celery temporarily.
 # CELERY_ALWAYS_EAGER = True
+
+
+# Third-party libraries :: Build recommendation engine
+
+REDIS_HOST = "localhost"
+REDIS_PORT = "6379"
+REDIS_DB = 2
 
 
 # Third-party libraries :: i18n
