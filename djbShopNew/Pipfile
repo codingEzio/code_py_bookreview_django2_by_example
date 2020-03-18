@@ -4,20 +4,20 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+# formatter & linter
 black = "==19.3b0"
 flake8 = "==3.7.8"
-
-[packages]
-# core
-django = "==3.0.0"
-python-dotenv = "==0.10.3"
-# Django3.0 related (django.utils.six was removed)
-six = "==1.13.0"
 # dev enhancement
 jupyter = "==1.0.0"
 ipython = "==7.10.2"
 django-extensions = "==2.2.5"
 django-debug-toolbar = "==2.1"
+# Django3.0 specific (django.utils.six was removed)
+six = "==1.13.0"
+
+[packages]
+# core
+python-dotenv = "==0.10.3"
 # task-queue (requires a message broker, RMQ or Redis)
 celery = "==4.4.0"
 redis = "==3.3.11"  # also used for building 'recommendation engine'
@@ -33,6 +33,7 @@ django-rosetta = "==0.9.3"
 django-parler = "==2.0"
 # i10n
 django-localflavor = "==2.2"
+django = "==2.2.7"
 
 [requires]
 python_version = "3.7"
