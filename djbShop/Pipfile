@@ -20,4 +20,4 @@ celery = "==4.3.0"
 flower = "==0.9.3"
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
